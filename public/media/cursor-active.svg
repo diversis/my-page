@@ -1,0 +1,4 @@
+<svg id='cursor' width='10px' height='10px' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'
+>
+    <circle cx="5" cy="5" r="5" fill="hsla(0,0%,100%,80%)" />
+</svg>

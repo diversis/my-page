@@ -2,26 +2,143 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+	:root {
+		--removed-body-scroll-bar-size: 0px;
+	}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+	*::before,
+	*::after {
+		border-width: 0;
+		pointer-events: none;
+		user-select: none;
+	}
+	html {
+		overflow-x: hidden;
+		overflow-y: auto;
+		-webkit-text-size-adjust: 100%; /* for iOS Safari */
+		text-size-adjust: 100%; /* for other mobile browsers */
+
+		-webkit-font-smoothing: antialiased;
+	}
+
+	html:focus-within {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		/* overflow-y: auto; */
+		/* background-image: url("/bg.jpg"); */
+		text-rendering: optimizeSpeed;
+		cursor: url(/media/cursor.svg), pointer;
+		@apply relative grid bg-surface-50 dark:bg-surface-900
+				min-h-screen w-screen max-w-[100vw]
+				grid-cols-[1fr] grid-rows-[1fr_auto]
+				overflow-x-clip;
+	}
+	/* body::after {
+      @apply fixed inset-0 -z-[10] bg-gradient-to-b from-primary-50 to-secondary-50 bg-cover bg-fixed bg-no-repeat opacity-100 transition-opacity duration-500 content-[""] dark:opacity-0;
   }
-}
+  body::before {
+      @apply fixed inset-0 -z-[10] bg-gradient-to-b from-primary-900 to-secondary-900 bg-cover bg-fixed bg-no-repeat opacity-0 transition-opacity duration-500 content-[""] dark:opacity-100;
+  } */
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	svg {
+		display: block;
+	}
+
+	/* Add pointer cursors to interactive elements  */
+	a,
+	label:not([disabled]),
+	button:not([disabled]),
+	select:not([disabled]),
+	summary:not([disabled]),
+	[type="radio"]:not([disabled]),
+	[type="submit"]:not([disabled]),
+	[type="checkbox"]:not([disabled]) {
+		cursor: url(/media/cursor-active.svg), pointer;
+	}
+
+	[disabled] {
+		cursor: not-allowed;
+	}
+
+	/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+	ul[role="list"],
+	ol[role="list"],
+	li {
+		list-style: none;
+	}
+
+	/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+	@media (prefers-reduced-motion: reduce) {
+		html:focus-within {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+
+	/* custom scrollbar */
+
+	/* body {
+      scrollbar-gutter: stable both-edges;
+  } */
+
+	::-webkit-scrollbar {
+		width: min(0.5rem, 0.5vw);
+		/* min-width: 100%; */
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-primary-900/25 backdrop-blur-sm;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-tertiary-500 bg-gradient-to-b from-tertiary-500 to-secondary-500;
+		border-radius: 100px;
+	}
+}
+@layer utilities {
+	.text-stroke {
+		-webkit-text-stroke: 1px #000;
+	}
+	.dark .text-stroke {
+		-webkit-text-stroke: 1px #fff;
+	}
+
+	.link {
+		@apply text-stroke;
+	}
+
+	/* Typography */
+    .h1 {
+        @apply text-[clamp(2rem,3vw+2rem,5.375rem)] uppercase !leading-tight lg:text-4xl xl:text-5xl 2xl:text-6xl;
+    }
+
+    .h2 {
+        @apply text-shadow container px-2 text-center text-2xl font-bold !leading-tight md:text-3xl  xl:text-4xl;
+    }
+    .h3 {
+        @apply text-[1.5rem] font-semibold leading-normal md:text-2xl xl:text-3xl;
+    }
+    .h4 {
+        @apply text-[1.25rem] tracking-widest md:text-2xl;
+    }
+    .h5 {
+        @apply text-base uppercase  md:text-[1.25rem] xl:text-xl;
+    }
+    .h6 {
+        @apply text-lg font-medium;
+    }
+    .h7 {
+        @apply text-xs tracking-wide;
+    }
 }
