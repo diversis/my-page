@@ -1,6 +1,13 @@
-import { ReactNode } from "react";
+import {
+	ReactNode,
+	SetStateAction,
+	useRef,
+	useState,
+	Dispatch,
+	useEffect,
+	PointerEvent,
+} from "react";
 import { Playfair } from "next/font/google";
-import { useRef, useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 
 import Meta from "./meta";
@@ -8,6 +15,7 @@ import BodyBG from "@/components/layout/bg";
 import Header from "./header";
 import Mouse from "./mouse";
 import MouseClick from "./click";
+import Footer from "./footer";
 
 const playfair = Playfair({ subsets: ["latin"] });
 
@@ -17,7 +25,15 @@ export default function Layout({
 	children: ReactNode;
 }) {
 	const ref = useRef<HTMLDivElement>(null);
-	const [clicked, setClicked] = useState(false);
+	const [clicks, setClicks] = useState<
+		| {
+				[key in keyof string]: {
+					x: number;
+					y: number;
+				};
+		  }
+		| {}
+	>({});
 	const [mousePosition, setMousePosition] = useState<{
 		x: number;
 		y: number;
@@ -42,6 +58,31 @@ export default function Layout({
 	) => {
 		setClickPosition({ x: e.clientX, y: e.clientY });
 	};
+
+	const handlePointerDown = async (
+		event: PointerEvent<HTMLDivElement>
+	) => {
+		const timeKey = Date.now();
+		// console.log(event);
+		await setClicks((state) => ({
+			...state,
+			[timeKey]: {
+				x: event.clientX,
+				y: event.clientY,
+			},
+		}));
+		setTimeout(
+			async () =>
+				setClicks((state) => {
+					const clickState = { ...state };
+					delete clickState[timeKey];
+					// console.log(clickState);
+					return clickState;
+				}),
+			2100
+		);
+	};
+
 	return (
 		<>
 			<Meta />
@@ -52,18 +93,22 @@ export default function Layout({
 			</a>
 			<div
 				onMouseMove={handleMouseMove}
-				onClick={handleMouseClick}
+				onPointerDownCapture={handlePointerDown}
 				ref={ref}
 				id='layout'>
 				<Header />
 				{/* <BodyBG /> */}
 				<Mouse mousePosition={mousePosition} />
-				<MouseClick />
+				<MouseClick clicks={clicks} />
 				{/* <AnimatePresence>
 					{clicked ? <m.div></m.div> : null}
 				</AnimatePresence> */}
 				<main
-					className={`z-10 flex min-h-screen pt-24 flex-col items-center justify-between ${playfair.className}`}></main>
+					id='page-top'
+					className={`z-10 flex min-h-screen [&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>
+					{children}
+				</main>
+				<Footer />
 			</div>
 		</>
 	);

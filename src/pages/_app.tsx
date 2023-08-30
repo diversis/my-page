@@ -12,13 +12,28 @@ import {
 	LazyMotion,
 	domMax,
 } from "framer-motion";
+import {
+	CacheProvider,
+	EmotionCache,
+} from "@emotion/react";
+
+import createEmotionCache from "@/components/mui/createEmotionCache";
 import Layout from "@/components/layout";
+
+export interface MyAppProps extends AppProps {
+	emotionCache?: EmotionCache;
+}
+
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
 NProgress.configure({ showSpinner: false });
 
 export default function App({
 	Component,
 	pageProps,
-}: AppProps) {
+	emotionCache = clientSideEmotionCache,
+}: MyAppProps) {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 
@@ -50,53 +65,58 @@ export default function App({
 	}, [router.events]);
 
 	return (
-		<ThemeProvider
-			attribute='class'
-			defaultTheme='system'
-			enableSystem={true}
-			themes={["light", "dark"]}>
-			<LazyMotion
-				features={domMax}
-				strict>
-				<MotionConfig reducedMotion='user'>
-					<Layout>
-						<AnimatePresence
-							mode='sync'
-							// initial={false}
-							onExitComplete={() =>
-								window.scrollTo(0, 0)
-							}>
-							{!loading ? (
-								<m.div
-									key='main-wrap'
-									initial={{
-										opacity: 0,
-										translateX: "-100%",
-									}}
-									animate={{
-										opacity: 1,
-										translateX: "0%",
-									}}
-									exit={{
-										opacity: 0,
-										translateX: "100%",
-										transition: {
+		<CacheProvider value={emotionCache}>
+			<ThemeProvider
+				attribute='class'
+				defaultTheme='system'
+				enableSystem={true}
+				themes={["light", "dark"]}>
+				<LazyMotion
+					features={domMax}
+					strict>
+					<MotionConfig reducedMotion='user'>
+						<Layout>
+							<AnimatePresence
+								mode='sync'
+								// initial={false}
+								onExitComplete={() =>
+									window.scrollTo(0, 0)
+								}>
+								{!loading ? (
+									<m.div
+										key='main-wrap'
+										initial={{
+											opacity: 0,
+											translateX:
+												"-100%",
+										}}
+										animate={{
+											opacity: 1,
+											translateX:
+												"0%",
+										}}
+										exit={{
+											opacity: 0,
+											translateX:
+												"100%",
+											transition: {
+												duration: 0.5,
+											},
+										}}
+										transition={{
 											duration: 0.5,
-										},
-									}}
-									transition={{
-										duration: 0.5,
-									}}
-									className='flex h-full w-full flex-col items-center'>
-									<Component
-										{...pageProps}
-									/>
-								</m.div>
-							) : null}
-						</AnimatePresence>
-					</Layout>
-				</MotionConfig>
-			</LazyMotion>
-		</ThemeProvider>
+										}}
+										className='flex h-full w-full flex-col items-center'>
+										<Component
+											{...pageProps}
+										/>
+									</m.div>
+								) : null}
+							</AnimatePresence>
+						</Layout>
+					</MotionConfig>
+				</LazyMotion>
+			</ThemeProvider>
+		</CacheProvider>
 	);
 }

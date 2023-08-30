@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: "class",
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -88,14 +89,22 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       animation: {
-        'cursor-pulse': "cursor-pulse 2s cubic-bezier(0.650, -0.600, 0.585, 1.540) 5s"
+        'cursor-pulse': "cursor-pulse 2s cubic-bezier(0.650, -0.600, 0.585, 1.540) 5s",
+        'rotate-slow': 'rotate 30s linear  infinite'
       },
       keyframes: {
         'cursor-pulse': {
           '0%': { transform: 'scale(0)', opacity: '0' },
           '50%': { transform: 'scale(40)', opacity: '1' },
           '100%': { transform: 'scale(100)', opacity: '0.5' }
+        },
+        'rotate': {
+          '0%': { transform: 'rotate(0)' },
+          '100%': { transform: 'rotate(360deg)' }
         }
+      },
+      boxShadow: {
+        'round-xl': '0 0 20px 20px'
       }
     },
   },

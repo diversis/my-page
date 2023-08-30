@@ -10,42 +10,76 @@ import {
 	useState,
 	Dispatch,
 	useEffect,
+	PointerEvent,
+	useMemo,
 } from "react";
 
-export default function MouseClick() {
-	const [scope, animate] = useAnimate();
-	const [clicks, setClicks] = useState<
+export default function MouseClick({
+	clicks,
+}: {
+	clicks:
 		| {
 				[key in keyof string]: {
-					event:
-						| MouseEvent
-						| TouchEvent
-						| PointerEvent;
-					info: TapInfo;
+					x: number;
+					y: number;
 				};
 		  }
-		| {}
-	>({});
-	const handleTap = async (
-		event: MouseEvent | TouchEvent | PointerEvent,
-		info: TapInfo
-	) => {
-		const timeKey = Date.now();
-		await setClicks((state) => ({
-			...state,
-			[timeKey]: { event, info },
-		}));
-		setTimeout(
-			async () =>
-				setClicks((state) => {
-					const clickState = { ...state };
-					// delete clickState[timeKey];
-					// console.log();
-					return clickState;
-				}),
-			3000
-		);
-	};
+		| {};
+}) {
+	const [scope, animate] = useAnimate();
+	// const [clicks, setClicks] = useState<
+	// 	| {
+	// 			[key in keyof string]: {
+	// 				x: number;
+	// 				y: number;
+	// 			};
+	// 	  }
+	// 	| {}
+	// >({});
+	// const handleTap = async (
+	// 	event: MouseEvent | TouchEvent | PointerEvent,
+	// 	info: TapInfo
+	// ) => {
+	// 	const timeKey = Date.now();
+	// 	await setClicks((state) => ({
+	// 		...state,
+	// 		[timeKey]: { event, info },
+	// 	}));
+	// 	setTimeout(
+	// 		async () =>
+	// 			setClicks((state) => {
+	// 				const clickState = { ...state };
+	// 				// delete clickState[timeKey];
+	// 				// console.log();
+	// 				return clickState;
+	// 			}),
+	// 		3000
+	// 	);
+	// };
+
+	// const handlePointerDown = async (
+	// 	event: PointerEvent<HTMLDivElement>
+	// ) => {
+	// 	const timeKey = Date.now();
+	// 	console.log(event);
+	// 	await setClicks((state) => ({
+	// 		...state,
+	// 		[timeKey]: {
+	// 			x: event.clientX,
+	// 			y: event.clientY,
+	// 		},
+	// 	}));
+	// 	setTimeout(
+	// 		async () =>
+	// 			setClicks((state) => {
+	// 				const clickState = { ...state };
+	// 				// delete clickState[timeKey];
+	// 				// console.log();
+	// 				return clickState;
+	// 			}),
+	// 		3000
+	// 	);
+	// };
 
 	// useEffect(() => {
 	// 	console.log(clicks);
@@ -55,7 +89,8 @@ export default function MouseClick() {
 		<>
 			<m.div
 				ref={scope}
-				onTap={handleTap}
+				// onTap={handleTap}
+				// onPointerDownCapture={handlePointerDown}
 				className=' [mask-image:url(/media/2.svg)] bg-transparent fixed inset-x-0 top-0 h-screen'>
 				<AnimatePresence>
 					{clicks &&
@@ -63,13 +98,12 @@ export default function MouseClick() {
 						Object.entries(clicks).map(
 							([key, value]) => {
 								if (!value) return null;
-								const { event, info } =
-									value;
+								const { x, y } = value;
 								return (
 									<TapAnimation
 										key={key}
-										event={event}
-										info={info}
+										value={value}
+										// info={info}
 									/>
 								);
 							}
@@ -81,18 +115,23 @@ export default function MouseClick() {
 }
 
 function TapAnimation({
-	event,
+	value,
 	info,
 }: {
-	event: MouseEvent | TouchEvent | PointerEvent;
-	info: TapInfo;
+	value: {
+		x: number;
+		y: number;
+	};
+	info?: TapInfo;
 }) {
+	const rotation = useMemo(() => Math.random() * 60, []);
 	return (
 		<m.div
-			className='pointer-events-none [mask-image:radial-gradient(transparent_50%,black_60%,transparent)] rounded-[50%] fixed bg-[repeating-conic-gradient(transparent_0%,transparent_15%,#ff33f3_15.5%,#ff3333_16%,transparent_16.66%)] w-20 h-20'
+			className='pointer-events-none transition-colors duration-300 [mask-image:repeating-conic-gradient(#000_0%,#000_0.5%,transparent_1%,transparent_16.66%)] rounded-[50%] fixed bg-[radial-gradient(transparent_50%,#5f33f3_50%,#ff33f3_60%,transparent_70%)] w-20 h-20'
 			style={{
-				x: info.point.x - 32,
-				y: info.point.y - 32,
+				x: value.x - 32,
+				y: value.y - 32,
+				rotate: rotation + "deg",
 			}}
 			animate={{
 				scale: [0.1, 5, 10],
