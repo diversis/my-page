@@ -27,71 +27,12 @@ export default function MouseClick({
 		| {};
 }) {
 	const [scope, animate] = useAnimate();
-	// const [clicks, setClicks] = useState<
-	// 	| {
-	// 			[key in keyof string]: {
-	// 				x: number;
-	// 				y: number;
-	// 			};
-	// 	  }
-	// 	| {}
-	// >({});
-	// const handleTap = async (
-	// 	event: MouseEvent | TouchEvent | PointerEvent,
-	// 	info: TapInfo
-	// ) => {
-	// 	const timeKey = Date.now();
-	// 	await setClicks((state) => ({
-	// 		...state,
-	// 		[timeKey]: { event, info },
-	// 	}));
-	// 	setTimeout(
-	// 		async () =>
-	// 			setClicks((state) => {
-	// 				const clickState = { ...state };
-	// 				// delete clickState[timeKey];
-	// 				// console.log();
-	// 				return clickState;
-	// 			}),
-	// 		3000
-	// 	);
-	// };
-
-	// const handlePointerDown = async (
-	// 	event: PointerEvent<HTMLDivElement>
-	// ) => {
-	// 	const timeKey = Date.now();
-	// 	console.log(event);
-	// 	await setClicks((state) => ({
-	// 		...state,
-	// 		[timeKey]: {
-	// 			x: event.clientX,
-	// 			y: event.clientY,
-	// 		},
-	// 	}));
-	// 	setTimeout(
-	// 		async () =>
-	// 			setClicks((state) => {
-	// 				const clickState = { ...state };
-	// 				// delete clickState[timeKey];
-	// 				// console.log();
-	// 				return clickState;
-	// 			}),
-	// 		3000
-	// 	);
-	// };
-
-	// useEffect(() => {
-	// 	console.log(clicks);
-	// }, [clicks]);
 
 	return (
 		<>
 			<m.div
 				ref={scope}
-				// onTap={handleTap}
-				// onPointerDownCapture={handlePointerDown}
-				className=' [mask-image:url(/media/2.svg)] bg-transparent fixed inset-x-0 top-0 h-screen'>
+				className='z-[9000] pointer-events-none [mask-image:url(/media/2.svg)] bg-transparent fixed inset-x-0 top-0 h-screen'>
 				<AnimatePresence>
 					{clicks &&
 						Object.entries(clicks).length > 0 &&

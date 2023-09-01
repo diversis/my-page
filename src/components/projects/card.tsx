@@ -28,14 +28,7 @@ export default function ProjectCard({
 			<div className='flex flex-col gap-2 lg:gap-4'>
 				<span className='flex flex-col gap-2'>
 					<h3 className='h3'>{project.name}</h3>
-					{TypeIcon ? (
-						<TypeIcon
-							height={32}
-							className=' dark:bg-surface-50/25 rounded'
-						/>
-					) : (
-						<p className='h5'>{project.type}</p>
-					)}
+					<p className='h5'>{project.type}</p>
 				</span>
 				<Image
 					alt={project.name}

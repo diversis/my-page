@@ -6,18 +6,6 @@ export default function SVGMouse({
 }: {
 	mousePosition: { x: number; y: number };
 }) {
-	// const ref = useRef<HTMLDivElement>(null);
-
-	// const handleMouseMove = async (
-	// 	e: React.MouseEvent<HTMLElement, MouseEvent>
-	// ) => {
-	// 	// setMouseX(e.clientX);
-	// 	// setMouseY(e.clientY);
-	// 	setMousePosition({
-	// 		x: e.clientX,
-	// 		y: e.clientY,
-	// 	});
-	// };
 	return (
 		<>
 			<m.div className='pointer-events-none [mask-image:url(/media/1.svg)] bg-transparent fixed inset-x-0 top-0 h-screen'>

@@ -14,8 +14,6 @@
 		user-select: none;
 	}
 	html {
-		overflow-x: hidden;
-		overflow-y: auto;
 		-webkit-text-size-adjust: 100%; /* for iOS Safari */
 		text-size-adjust: 100%; /* for other mobile browsers */
 
@@ -131,13 +129,92 @@
 		@apply content-[""] absolute top-0 left-0 right-full -bottom-2 bg-[size:100%_4px] bg-bottom bg-no-repeat transition-all duration-500 bg-transparent bg-gradient-to-r from-transparent via-primary-500 to-transparent;
 	}
 
+	.text-shadow {
+		text-shadow:
+			-1px 1px 1px hsla(0, 0%, 100%, 0.5),
+			1px -1px 1px hsla(0, 0%, 0%, 0.5);
+	}
+
+	.waves {
+		clip-path: url(#clip-waves);
+	}
+
+	.radial-mask {
+		mask-image: radial-gradient(
+			black 0%,
+			black 65%,
+			transparent 70%,
+			transparent 100%
+		);
+		-webkit-mask-image: radial-gradient(
+			black 0%,
+			black 65%,
+			transparent 70%,
+			transparent 100%
+		);
+	}
+
+	.horizontal-frame-mask {
+		mask-image: linear-gradient(
+			to bottom,
+			transparent 0%,
+			black 10%,
+			black 65%,
+			transparent 70%,
+			transparent 100%
+		);
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			transparent 0%,
+			black 10%,
+			black 65%,
+			transparent 70%,
+			transparent 100%
+		);
+	}
+
+	.wave-vertical {
+		@apply [clip-path:url('#clip-wave-vertical')];
+	}
+
+	.wave {
+		@apply [clip-path:url('/media/wave.svg')];
+	}
+
+	/* Spicy */
+	@supports (
+			(background-clip: text) or
+				(-webkit-background-clip: text)
+		)
+		and
+		(
+			(color: transparent) or
+				(-webkit-text-fill-color: transparent)
+		) {
+		.spicy {
+			line-height: 1.45em !important;
+
+			@apply bg-clip-text text-transparent;
+		}
+
+		@supports (
+			-webkit-box-reflect: below -0.7em
+				linear-gradient(transparent 62%, #000)
+		) {
+			.spicy {
+				-webkit-box-reflect: below -0.7em linear-gradient(transparent
+							62%, #000);
+			}
+		}
+	}
+
 	/* Typography */
 	.h1 {
 		@apply text-[clamp(2rem,3vw+2rem,5.375rem)] uppercase !leading-tight lg:text-4xl xl:text-5xl 2xl:text-6xl;
 	}
 
 	.h2 {
-		@apply container px-2 text-center text-2xl font-bold !leading-tight md:text-3xl  xl:text-4xl;
+		@apply text-shadow container px-2 text-center text-2xl font-bold !leading-tight md:text-3xl  xl:text-4xl;
 	}
 	.h3 {
 		@apply text-[1.5rem] font-semibold leading-normal md:text-2xl xl:text-3xl;

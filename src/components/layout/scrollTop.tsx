@@ -1,19 +1,13 @@
-"use client";
-import { AnimatePresence, m } from "framer-motion";
-import useScrolled from "@/lib/hooks/use-scrolled";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
+import { AnimatePresence, m } from "framer-motion";
 
 export default function ScrollTop({
 	children,
+	trigger,
 }: {
 	children: React.ReactElement;
+	trigger: boolean;
 }) {
-	// const { children, window } = props;
-	// Note that you normally won't need to set the window ref as useScrollTrigger
-	// will default to window.
-	// This is only being set here because the demo is in an iframe.
-	const trigger = useScrolled(100);
-
 	const handleClick = (
 		event: React.MouseEvent<HTMLDivElement>
 	) => {
@@ -24,10 +18,11 @@ export default function ScrollTop({
 
 		if (anchor) {
 			anchor.scrollIntoView({
-				block: "start",
+				block: "end",
 			});
 		}
 	};
+	// const MBox = m(Box);
 	return (
 		<AnimatePresence>
 			{trigger && (

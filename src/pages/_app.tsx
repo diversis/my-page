@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "next-themes";
+import { Provider as RWBProvider } from "react-wrap-balancer";
 import NProgress from "nprogress";
 import {
 	AnimatePresence,
@@ -24,7 +25,6 @@ export interface MyAppProps extends AppProps {
 	emotionCache?: EmotionCache;
 }
 
-// Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 NProgress.configure({ showSpinner: false });
@@ -40,20 +40,13 @@ export default function App({
 	const start = () => {
 		setLoading(true);
 		NProgress.start();
-		// console.log(`\n----------\n Loading: START ${loading} \n----------\n`);
 	};
 	const end = () => {
 		setLoading(false);
 		NProgress.done();
-		// console.log(`\n----------\n Loading: END ${loading} \n----------\n`);
 	};
-	// useEffect(() => {
-	//     console.log(`\n----------\n Loading: ${loading} \n----------\n`);
-	// }, [loading]);
 
 	useEffect(() => {
-		// Used for page transition
-
 		router.events.on("routeChangeStart", start);
 		router.events.on("routeChangeComplete", end);
 		router.events.on("routeChangeError", end);
@@ -75,45 +68,51 @@ export default function App({
 					features={domMax}
 					strict>
 					<MotionConfig reducedMotion='user'>
-						<Layout>
-							<AnimatePresence
-								mode='sync'
-								// initial={false}
-								onExitComplete={() =>
-									window.scrollTo(0, 0)
-								}>
-								{!loading ? (
-									<m.div
-										key='main-wrap'
-										initial={{
-											opacity: 0,
-											translateX:
-												"-100%",
-										}}
-										animate={{
-											opacity: 1,
-											translateX:
-												"0%",
-										}}
-										exit={{
-											opacity: 0,
-											translateX:
-												"100%",
-											transition: {
+						<RWBProvider>
+							<Layout>
+								<AnimatePresence
+									mode='sync'
+									// initial={false}
+									onExitComplete={() =>
+										window.scrollTo(
+											0,
+											0
+										)
+									}>
+									{!loading ? (
+										<m.div
+											key='main-wrap'
+											initial={{
+												opacity: 0,
+												translateX:
+													"-100%",
+											}}
+											animate={{
+												opacity: 1,
+												translateX:
+													"0%",
+											}}
+											exit={{
+												opacity: 0,
+												translateX:
+													"100%",
+												transition:
+													{
+														duration: 0.5,
+													},
+											}}
+											transition={{
 												duration: 0.5,
-											},
-										}}
-										transition={{
-											duration: 0.5,
-										}}
-										className='flex h-full w-full flex-col items-center'>
-										<Component
-											{...pageProps}
-										/>
-									</m.div>
-								) : null}
-							</AnimatePresence>
-						</Layout>
+											}}
+											className='flex h-full w-full flex-col items-center'>
+											<Component
+												{...pageProps}
+											/>
+										</m.div>
+									) : null}
+								</AnimatePresence>
+							</Layout>
+						</RWBProvider>
 					</MotionConfig>
 				</LazyMotion>
 			</ThemeProvider>

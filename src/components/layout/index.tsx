@@ -16,6 +16,7 @@ import Header from "./header";
 import Mouse from "./mouse";
 import MouseClick from "./click";
 import Footer from "./footer";
+import Filters from "../shared/filters";
 
 const playfair = Playfair({ subsets: ["latin"] });
 
@@ -38,13 +39,6 @@ export default function Layout({
 		x: number;
 		y: number;
 	}>({ x: 0, y: 0 });
-	const [clickPosition, setClickPosition] = useState<
-		| {
-				x: number;
-				y: number;
-		  }
-		| undefined
-	>(undefined);
 	const handleMouseMove = async (
 		e: React.MouseEvent<HTMLElement, MouseEvent>
 	) => {
@@ -53,12 +47,6 @@ export default function Layout({
 			y: e.clientY,
 		});
 	};
-	const handleMouseClick = async (
-		e: React.MouseEvent<HTMLElement, MouseEvent>
-	) => {
-		setClickPosition({ x: e.clientX, y: e.clientY });
-	};
-
 	const handlePointerDown = async (
 		event: PointerEvent<HTMLDivElement>
 	) => {
@@ -96,6 +84,7 @@ export default function Layout({
 				onPointerDownCapture={handlePointerDown}
 				ref={ref}
 				id='layout'>
+				<Filters />
 				<Header />
 				{/* <BodyBG /> */}
 				<Mouse mousePosition={mousePosition} />
@@ -103,8 +92,8 @@ export default function Layout({
 				{/* <AnimatePresence>
 					{clicked ? <m.div></m.div> : null}
 				</AnimatePresence> */}
+				<div id='page-top' />
 				<main
-					id='page-top'
 					className={`z-10 flex min-h-screen [&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>
 					{children}
 				</main>

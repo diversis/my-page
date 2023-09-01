@@ -1,14 +1,18 @@
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
-import useScrolled from "@/lib/hooks/use-scrolled";
 import { AnimatePresence, m } from "framer-motion";
 import Link from "next/link";
-import Fab from "@mui/material/Fab";
+import { useScrollTrigger, Fab } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ToggleTheme from "../shared/toggle-theme";
 import ScrollTop from "./scrollTop";
+import { useIsClient } from "usehooks-ts";
 
 export default function Header() {
-	const scrolled = useScrolled(100);
+	const isClient = useIsClient();
+	const scrolled = useScrollTrigger({
+		target: isClient ? window : undefined,
+		threshold: 300,
+	});
 	return (
 		<header>
 			<m.div
@@ -31,7 +35,7 @@ export default function Header() {
 					</div>
 				</div>
 			</m.div>
-			<ScrollTop>
+			<ScrollTop trigger={scrolled}>
 				<Fab
 					size='small'
 					aria-label='scroll back to top'>

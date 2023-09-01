@@ -45,7 +45,7 @@ export default function ToggleTheme() {
 	return (
 		<div className='flex flex-row items-center gap-0'>
 			<MUISwitch
-				checked={resolvedTheme === "dark"}
+				checked={resolvedTheme === "light"}
 				onChange={async () =>
 					await setTheme(
 						theme === "dark" ? "light" : "dark"
