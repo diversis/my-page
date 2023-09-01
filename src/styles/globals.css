@@ -89,9 +89,9 @@
 
 	/* custom scrollbar */
 
-	/* body {
-      scrollbar-gutter: stable both-edges;
-  } */
+	body {
+		scrollbar-gutter: stable both-edges;
+	}
 
 	::-webkit-scrollbar {
 		width: min(0.5rem, 0.5vw);
@@ -120,6 +120,10 @@
 	}
 	.dark .text-stroke-inverse {
 		-webkit-text-stroke: 1px #000;
+	}
+
+	.divider {
+		@apply border-t border-surface-200 dark:border-surface-700;
 	}
 
 	.link {

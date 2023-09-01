@@ -24,6 +24,7 @@ import Balancer from "react-wrap-balancer";
 import AnimatedDiv from "@/components/shared/animatedDiv";
 import { useWindowSize } from "usehooks-ts";
 import { Button } from "@mui/base";
+import MUIBaseModal from "../mui/modal";
 
 const lobster = Lobster({
 	subsets: ["latin", "cyrillic"],
@@ -106,11 +107,11 @@ export default function CTA({
 				</m.p>
 			</AnimatedDiv>
 			<div className='flex flex-row flex-wrap gap-4 lg:gap-8 xl:gap-12 w-full justify-center'>
-				<Button
-					onClick={handleClick}
+				<MUIBaseModal
+					title='Contact me'
 					className='px-4 py-2 h5 rounded-lg bg-primary-300 dark:bg-primary-800 transition-colors'>
-					Contact Me
-				</Button>
+					<div>Contact Me</div>
+				</MUIBaseModal>
 				<Button
 					onClick={handleClick}
 					className='px-4 py-2 h5 rounded-lg bg-tertiary-100 dark:bg-tertiary-800 transition-colors'>

@@ -130,7 +130,7 @@ function MUISwitch(props: UseSwitchParameters) {
 				} theme`}
 				className='peer absolute inset-0 opacity-0 z-0 m-0 cursor-pointer'
 			/>
-			<span className='absolute  inset-x-0 -top-1 bottom-1 rounded-[50%] pointer-events-none peer-focus:outline-double peer-focus:outline-1 peer-focus:border peer-focus:outline-black border-white'></span>
+			<span className='absolute  inset-x-0 -top-1 bottom-1 rounded-[50%] pointer-events-none peer-focus-visible:outline-double peer-focus-visible:outline-1 peer-focus-visible:border peer-focus-visible:outline-black border-white'></span>
 		</span>
 	);
 }

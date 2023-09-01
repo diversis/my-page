@@ -30,7 +30,7 @@ export default function ProjectsDisplay() {
 								project={project}
 							/>
 							{id < PROJECTS.length - 1 ? (
-								<hr className='border-t border-surface-200 dark:border-surface-700' />
+								<hr className='divider' />
 							) : null}
 						</Fragment>
 					);
