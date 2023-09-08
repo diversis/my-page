@@ -128,8 +128,28 @@
 		-webkit-text-stroke: 1px #000;
 	}
 
+	.button {
+		@apply relative active:scale-95 backdrop-blur rounded-lg px-4 py-2 transition-colors after:scale-0 before:absolute before:inset-0 before:-z-[5] before:rounded-lg before:shadow dark:before:shadow-inner dark:before:shadow-surface-200/25 before:shadow-surface-700/25 after:absolute after:inset-0 after:-z-10 after:rounded-lg after:transition-[opacity,transform,box-shadow] after:duration-500 [&:is(:hover,:focus-visible)]:after:scale-100 [&:is(:hover,:focus-visible)]:after:opacity-100 after:opacity-0 after:shadow-round-xl;
+	}
+
+	.button-tertiary {
+		@apply after:shadow-tertiary-500/25 dark:after:shadow-tertiary-100/25 bg-tertiary-100/50 dark:bg-tertiary-800/50 dark:active:shadow-tertiary-400/25 active:shadow-tertiary-400/25;
+	}
+
+	.button-primary {
+		@apply after:shadow-primary-500/25 dark:after:shadow-primary-100/25 bg-primary-300/50  dark:bg-primary-800/50 dark:active:shadow-primary-400/25 active:shadow-primary-400/25;
+	}
+
+	.input {
+		@apply relative rounded-lg before:absolute before:inset-0 before:-z-[5] before:rounded-lg before:shadow-inner dark:before:shadow-surface-200/25 before:shadow-surface-700/25 after:absolute after:inset-0 after:-z-10 after:rounded-lg after:transition-[opacity,transform,box-shadow] after:duration-500 [&:is(:hover,:focus-visible)]:after:opacity-100 after:opacity-0 after:shadow-md after:shadow-surface-500/25 dark:after:shadow-surface-100/25;
+	}
+
 	.divider {
-		@apply border-t border-surface-200 dark:border-surface-700;
+		@apply border-t border-surface-100 dark:border-surface-800 h-0;
+	}
+
+	.divider-v {
+		@apply border-l border-surface-100 dark:border-surface-800 w-0;
 	}
 
 	.link {

@@ -1,14 +1,10 @@
 import {
-	Dialog,
-	DialogTitle,
-	Button,
-	Typography,
-	Box,
-	Divider,
-	FormGroup,
-} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+	ComponentPropsWithoutRef,
+	Dispatch,
+	useState,
+	SetStateAction,
+} from "react";
+import { AnimatePresence, m } from "framer-motion";
 import { useSnackbar } from "notistack";
 import {
 	SubmitHandler,
@@ -18,18 +14,10 @@ import {
 import axios, { AxiosError, AxiosResponse } from "axios";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import StarIcon from "@mui/icons-material/Star";
-import {
-	ComponentPropsWithoutRef,
-	Dispatch,
-	forwardRef,
-	useState,
-	SetStateAction,
-} from "react";
-import { TransitionProps } from "@mui/material/transitions";
-import Slide from "@mui/material/Slide";
+
 import { ControlledInputField } from "../mui/fields/controlledInputField";
-import MUIBaseModal from "../mui/modal";
+import { STAGGER_VARIANTS } from "@/lib/constants/variants";
+import AnimatedDiv from "../shared/animatedDiv";
 
 const endpoint = "/api/review";
 
@@ -41,7 +29,7 @@ interface MailFields {
 
 interface MailModalProps
 	extends ComponentPropsWithoutRef<"div"> {
-	setPosted: Dispatch<SetStateAction<boolean>>;
+	handleClose: () => Promise<void>;
 }
 
 const schema = z.object({
@@ -71,20 +59,12 @@ async function sendFormData({
 	});
 }
 
-export default function MailModal({
-	setPosted,
+export default function MailForm({
+	handleClose,
 	...rest
 }: MailModalProps) {
-	const [open, setOpen] = useState(false);
 	const { enqueueSnackbar, closeSnackbar } =
 		useSnackbar();
-
-	const handleOpen = async () => {
-		await setOpen(true);
-	};
-	const handleClose = async () => {
-		await setOpen(false);
-	};
 
 	const {
 		control,
@@ -132,7 +112,6 @@ export default function MailModal({
 					variant: "success",
 					autoHideDuration: 6000,
 				});
-				setPosted(true);
 				handleClose();
 			}
 		} catch (error) {
@@ -150,7 +129,7 @@ export default function MailModal({
 	};
 
 	const onError: SubmitErrorHandler<MailFields> = (
-		{ name,email,text },
+		{ name, email, text },
 		e
 	) => {
 		try {
@@ -173,32 +152,68 @@ export default function MailModal({
 	};
 	// console.log(errors);
 	return (
-		<>
-			<Button
-				variant='contained'
-				onClick={handleOpen}
-				className='ml-auto'>
-				Post a Review
-			</Button>
-			<MUIBaseModal
-				open={open}
-				handleClose={handleClose}
-				title='mail'
-				className=''
-				{...rest}>
-				<form
-					className='relative flex w-[30vw] min-w-[20rem] flex-col gap-y-4  px-6 py-4 lg:min-w-[30rem]'
-					onSubmit={handleSubmit(
-						onSubmit,
-						onError
-					)}>
+		<m.form
+			variants={STAGGER_VARIANTS}
+			initial='hidden'
+			animate='visible'
+			exit='hidden'
+			className='relative w-full flex min-w-[20rem] flex-col gap-y-4  '
+			onSubmit={handleSubmit(onSubmit, onError)}>
+			<AnimatedDiv
+				direction='left'
+				className='flex flex-row gap-4 flex-wrap items-center w-full'>
+				<label
+					htmlFor='name'
+					className='w-[6ch]'>
+					Name
+				</label>
+				<hr className='divider-v h-5' />
+				<span className='flex-grow'>
 					<ControlledInputField
 						name='name'
 						control={control}
 						label='Name'
+						className='flex-grow w-full'
 					/>
-				</form>
-			</MUIBaseModal>
-		</>
+				</span>
+			</AnimatedDiv>
+			<AnimatedDiv
+				direction='right'
+				className='flex flex-row gap-4 flex-wrap items-center'>
+				<label
+					htmlFor='email'
+					className='w-[6ch]'>
+					Email
+				</label>
+				<hr className='divider-v h-5' />
+				<span className='flex-grow'>
+					<ControlledInputField
+						name='email'
+						control={control}
+						label='Email'
+						className='flex-grow w-full'
+					/>
+				</span>
+			</AnimatedDiv>
+			<AnimatedDiv
+				direction='bottom'
+				className='flex flex-row gap-4 flex-wrap items-center'>
+				<label
+					htmlFor='text'
+					className='w-[6ch]'>
+					Text
+				</label>
+				<hr className='divider-v h-5' />
+				<span className='flex-grow'>
+					<ControlledInputField
+						name='text'
+						control={control}
+						label='text'
+						className='flex-grow  w-full'
+						multiline={true}
+					/>
+				</span>
+			</AnimatedDiv>
+		</m.form>
 	);
 }

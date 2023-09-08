@@ -31,13 +31,17 @@ export const ControlledInputField = <
 				fieldState: { error },
 				formState,
 			}) => (
-				<>
-					<label htmlFor={name}>{label}</label>
+				<div className='flex flex-col gap-0.5 w-full'>
 					<Input
 						name={name}
 						error={!!error}
 						onChange={onChange}
 						value={value}
+						slotProps={{
+							input: {
+								className: "input w-full",
+							},
+						}}
 						{...rest}
 					/>
 					{error ? (
@@ -45,7 +49,7 @@ export const ControlledInputField = <
 							{error.message}
 						</span>
 					) : null}
-				</>
+				</div>
 			)}
 		/>
 	);

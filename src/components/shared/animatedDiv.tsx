@@ -15,6 +15,7 @@ export default function AnimatedDiv({
 	animateInView = true,
 	variants,
 	overflowHidden = true,
+	...rest
 }: {
 	children?: ReactNode;
 	className?: string;
@@ -98,7 +99,8 @@ export default function AnimatedDiv({
 			ref={ref}
 			className={`${
 				overflowHidden ? "overflow-hidden " : " "
-			} ${classNameWrapper ? classNameWrapper : ""}`}>
+			} ${classNameWrapper ? classNameWrapper : ""}`}
+			{...rest}>
 			<m.div
 				variants={resultVariants}
 				className={className}>

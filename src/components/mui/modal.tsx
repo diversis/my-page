@@ -1,11 +1,6 @@
 import { Modal, Button } from "@mui/base";
 import { m } from "framer-motion";
-import {
-	ReactNode,
-	forwardRef,
-	useEffect,
-	useState,
-} from "react";
+import { ReactNode, forwardRef } from "react";
 import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
@@ -15,7 +10,7 @@ export type MUIBaseModalProps = {
 	buttonText?: string;
 	description?: string;
 	children?: ReactNode;
-	className: string;
+	className?: string;
 	handleClose: () => Promise<void>;
 	open: boolean;
 } & Omit<typeof Modal, "children">;
@@ -45,10 +40,12 @@ export default function MUIBaseModal({
 				<Fade in={open}>
 					<Box
 						component={m.div}
-						className='relative flex flex-col gap-2 lg:gap-4 max-w-[95vw] w-[30rem] px-6 py-4 rounded bg-surface-100/80 dark:bg-surface-800/80'>
+						className={`relative flex flex-col gap-2 lg:gap-4 max-w-[95vw] w-[30rem] px-6 py-4 rounded bg-surface-100/80 dark:bg-surface-800/80 ${
+							className || ""
+						}`}>
 						<Button
 							onClick={handleClose}
-							className='absolute rounded-[50%] w-8 h-8 shadow-inner shadow-surface-50 flex items-center bg-tertiary-800 dark:bg-tertiary-500 -top-2 -right-2 group/close active:scale-90 transition-transform'>
+							className=' button button-primary !absolute rounded-[50%] w-8 h-8 shadow-inner shadow-surface-50 flex items-center bg-tertiary-800 dark:bg-tertiary-500 -top-2 -right-2 group/close active:scale-90 transition-transform'>
 							<CloseIcon
 								sx={{
 									width: "32px",

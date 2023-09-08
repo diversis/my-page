@@ -7,18 +7,16 @@ import {
 	useEffect,
 	PointerEvent,
 } from "react";
-import { Playfair } from "next/font/google";
-import { m, AnimatePresence } from "framer-motion";
+import { Playfair_Display } from "next/font/google";
 
 import Meta from "./meta";
-import BodyBG from "@/components/layout/bg";
 import Header from "./header";
 import Mouse from "./mouse";
 import MouseClick from "./click";
 import Footer from "./footer";
 import Filters from "../shared/filters";
 
-const playfair = Playfair({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 export default function Layout({
 	children,
