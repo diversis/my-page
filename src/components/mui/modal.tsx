@@ -16,31 +16,22 @@ export type MUIBaseModalProps = {
 	description?: string;
 	children?: ReactNode;
 	className: string;
+	handleClose: () => Promise<void>;
+	open: boolean;
 } & Omit<typeof Modal, "children">;
 
 export default function MUIBaseModal({
 	title,
 	description,
 	buttonText,
-
+	open,
 	className,
 	children,
+	handleClose,
 	...props
 }: MUIBaseModalProps) {
-	const [open, setOpen] = useState(false);
-	const handleOpen = async () => await setOpen(true);
-	const handleClose = async () => await setOpen(false);
-	useEffect(() => {
-		console.log("open: ", open);
-	}, [open]);
 	return (
 		<div>
-			<Button
-				type='button'
-				onClick={handleOpen}
-				className={className}>
-				{buttonText || title}
-			</Button>
 			<Modal
 				aria-labelledby={`modal-${title}-title`}
 				aria-describedby={`modal-${title}-description`}

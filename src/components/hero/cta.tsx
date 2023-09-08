@@ -40,7 +40,12 @@ export default function CTA({
 }) {
 	const ref = useRef(null);
 	const isInView = useInView(ref);
+	const [open, setOpen] = useState(false);
+
 	const { width, height } = useWindowSize();
+
+	const handleOpen = async () => await setOpen(true);
+	const handleClose = async () => await setOpen(false);
 
 	const mouseX = useMotionValue(mousePosition.x);
 	const mouseY = useMotionValue(mousePosition.y);
@@ -107,7 +112,12 @@ export default function CTA({
 				</m.p>
 			</AnimatedDiv>
 			<div className='flex flex-row flex-wrap gap-4 lg:gap-8 xl:gap-12 w-full justify-center'>
+				<Button onClick={handleOpen}>
+					Contact Me
+				</Button>
 				<MUIBaseModal
+					open={open}
+					handleClose={handleClose}
 					title='Contact me'
 					className='px-4 py-2 h5 rounded-lg bg-primary-300 dark:bg-primary-800 transition-colors'>
 					<div>Contact Me</div>
