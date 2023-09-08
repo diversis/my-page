@@ -1,9 +1,9 @@
 import { Modal, Button } from "@mui/base";
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import {
-	ForwardedRef,
 	ReactNode,
 	forwardRef,
+	useEffect,
 	useState,
 } from "react";
 import Fade from "@mui/material/Fade";
@@ -14,22 +14,25 @@ export type MUIBaseModalProps = {
 	title: string;
 	buttonText?: string;
 	description?: string;
-	children: ReactNode;
+	children?: ReactNode;
 	className: string;
-} & typeof Modal;
+} & Omit<typeof Modal, "children">;
 
 export default function MUIBaseModal({
 	title,
 	description,
 	buttonText,
-	children,
+
 	className,
+	children,
 	...props
 }: MUIBaseModalProps) {
 	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-
+	const handleOpen = async () => await setOpen(true);
+	const handleClose = async () => await setOpen(false);
+	useEffect(() => {
+		console.log("open: ", open);
+	}, [open]);
 	return (
 		<div>
 			<Button
@@ -48,13 +51,13 @@ export default function MUIBaseModal({
 				disableScrollLock
 				{...props}
 				className='fixed z-[1300] inset-0 flex items-center justify-center'>
-				<MotionWrapper in={open}>
+				<Fade in={open}>
 					<Box
 						component={m.div}
 						className='relative flex flex-col gap-2 lg:gap-4 max-w-[95vw] w-[30rem] px-6 py-4 rounded bg-surface-100/80 dark:bg-surface-800/80'>
 						<Button
 							onClick={handleClose}
-							className='absolute rounded-[50%] w-8 h-8 flex items-center bg-tertiary-800 dark:bg-tertiary-500 top-2 right-2 group/close active:scale-90 transition-transform'>
+							className='absolute rounded-[50%] w-8 h-8 shadow-inner shadow-surface-50 flex items-center bg-tertiary-800 dark:bg-tertiary-500 -top-2 -right-2 group/close active:scale-90 transition-transform'>
 							<CloseIcon
 								sx={{
 									width: "32px",
@@ -80,7 +83,7 @@ export default function MUIBaseModal({
 						) : null}
 						{children}
 					</Box>
-				</MotionWrapper>
+				</Fade>
 			</Modal>
 		</div>
 	);
@@ -92,70 +95,88 @@ const Backdrop = forwardRef<
 >((props, ref) => {
 	const { open, className, ownerState, ...other } = props;
 	return (
-		<MotionWrapper in={open}>
+		<Fade in={open}>
 			<div
 				className='-z-[1] backdrop-blur fixed inset-0 bg-surface-900/50 [-webkit-tap-highlight-color: transparent]'
 				ref={ref}
 				{...other}
 			/>
-		</MotionWrapper>
+		</Fade>
 	);
 });
 
 Backdrop.displayName = "Backdrop";
 
-interface WrapperProps {
-	children: React.ReactElement;
-	in?: boolean;
-	onClick?: any;
-	onEnter?: (
-		node: HTMLElement,
-		isAppearing: boolean
-	) => void;
-	onExited?: (
-		node: HTMLElement,
-		isAppearing: boolean
-	) => void;
-}
+// interface WrapperProps {
+// 	children: React.ReactElement;
+// 	in?: boolean;
+// 	onClick?: any;
+// 	onEnter?: (
+// 		node: HTMLElement,
+// 		isAppearing: boolean
+// 	) => void;
+// 	onExited?: (
+// 		node: HTMLElement,
+// 		isAppearing: boolean
+// 	) => void;
+// }
 
-const MotionWrapper = forwardRef(
-	(
-		{
-			in: open,
-			onEnter,
-			onExited,
-			children,
-			...rest
-		}: WrapperProps,
-		ref: ForwardedRef<HTMLDivElement>
-	) => {
-		const handleAnimationStart = () => {
-			if (open && onEnter) {
-				onEnter(null as any, true);
-			}
-		};
+// const MotionWrapper = forwardRef(
+// 	(
+// 		{
+// 			in: open,
+// 			onEnter,
+// 			onExited,
+// 			children,
+// 			...rest
+// 		}: WrapperProps,
+// 		ref: ForwardedRef<HTMLDivElement>
+// 	) => {
+// 		const [isPresent, safeToRemove] = usePresence();
+// 		const handleAnimationStart = async () => {
+// 			console.log("AnimationStart ", open);
+// 			if (isPresent && ref?.current)
+// 				await animate(
+// 					ref.current,
+// 					{ translateY: ["100%", "0%"] },
+// 					{ duration: 0.5 }
+// 				);
+// 			if (open && onEnter) {
+// 				onEnter(null as any, true);
+// 			}
+// 		};
 
-		const handleAnimationComplete = () => {
-			if (!open && onExited) {
-				onExited(null as any, true);
-			}
-		};
+// 		const handleAnimationComplete = async () => {
+// 			console.log("AnimationComplete ", open);
+// 			if (isPresent && ref?.current) {
+// 				await animate(
+// 					ref.current,
+// 					{ translateY: ["0%", "100%"] },
+// 					{ duration: 0.5 }
+// 				);
+// 				if (safeToRemove) safeToRemove();
+// 			}
 
-		return (
-			<m.div
-				ref={ref}
-				initial={{ translateY: "100%" }}
-				exit={{ translateY: "100%" }}
-				animate={{ translateY: "0%" }}
-				onAnimationStart={handleAnimationStart}
-				onAnimationComplete={
-					handleAnimationComplete
-				}
-				{...rest}>
-				{children}
-			</m.div>
-		);
-	}
-);
+// 			if (!open && onExited) {
+// 				onExited(null as any, true);
+// 			}
+// 		};
+// 		useEffect(() => {
+// 			handleAnimationStart();
+// 			return () => {
+// 				handleAnimationComplete();
+// 			};
+// 		}, [open]);
+// 		return (
+// 			<AnimatePresence>
+// 				<m.div
+// 					ref={ref}
+// 					{...rest}>
+// 					{children}
+// 				</m.div>
+// 			</AnimatePresence>
+// 		);
+// 	}
+// );
 
-MotionWrapper.displayName = "MotionWrapper";
+// MotionWrapper.displayName = "MotionWrapper";

@@ -25,8 +25,6 @@
 	}
 
 	body {
-		/* overflow-y: auto; */
-		/* background-image: url("/bg.jpg"); */
 		text-rendering: optimizeSpeed;
 		cursor: url(/media/cursor.svg), pointer;
 		@apply relative grid bg-surface-50 dark:bg-surface-900
@@ -37,12 +35,6 @@
 	.dark body {
 		cursor: url(/media/cursor-light.svg), pointer;
 	}
-	/* body::after {
-      @apply fixed inset-0 -z-[10] bg-gradient-to-b from-primary-50 to-secondary-50 bg-cover bg-fixed bg-no-repeat opacity-100 transition-opacity duration-500 content-[""] dark:opacity-0;
-  }
-  body::before {
-      @apply fixed inset-0 -z-[10] bg-gradient-to-b from-primary-900 to-secondary-900 bg-cover bg-fixed bg-no-repeat opacity-0 transition-opacity duration-500 content-[""] dark:opacity-100;
-  } */
 
 	svg {
 		display: block;
@@ -57,6 +49,20 @@
 	[type="radio"]:not([disabled]),
 	[type="submit"]:not([disabled]),
 	[type="checkbox"]:not([disabled]) {
+		cursor: url(/media/cursor-active-dark.svg), pointer;
+	}
+
+	.dark
+		:is(
+			a,
+			label:not([disabled]),
+			button:not([disabled]),
+			select:not([disabled]),
+			summary:not([disabled]),
+			[type="radio"]:not([disabled]),
+			[type="submit"]:not([disabled]),
+			[type="checkbox"]:not([disabled])
+		) {
 		cursor: url(/media/cursor-active.svg), pointer;
 	}
 

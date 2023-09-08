@@ -5,12 +5,12 @@
         repeatCount="indefinite" />
     <animate attributeName="height" values="8px;12px;8px" dur="1s"
         repeatCount="indefinite" />
-    <circle cx="4" cy="4" r="4" fill="hsla(178, 100%, 52%, 1)" stroke="hsla(0,0%,0%,1)"
+    <circle cx="4" cy="4" r="4" fill="hsla(244, 100%, 45%, 1)" stroke="hsla(0,0%,0%,1)"
         opacity="1"
         stroke-width="0.5">
         <animate attributeName="fill"
-            values="hsla(0,0%,100%,1);hsla(178, 100%, 71%, 1);hsla(178, 100%, 52%, 1);hsla(178, 100%, 71%, 1);hsla(0,0%,100%,1)"
-            keyTimes="0; 0.25; 0.5; 0.75; 1" dur="1s"
+            values="hsla(0,0%,100%,1);hsla(244, 100%, 63%, 1);hsla(244, 100%, 45%, 1);hsla(244, 100%, 63%, 1);hsla(0,0%,100%,1)"
+            keyTimes="0; 0.01; 0.5; 0.999; 1" dur="1s"
             repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.2;1;1;1;0.2" keyTimes="0; 0.25; 0.5; 0.75; 1"
             dur="1s"

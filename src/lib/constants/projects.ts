@@ -89,10 +89,10 @@ export const PROJECTS: Project[] = [
         tech: [
             NEXTJS,
             TAILWINDCSS,
-            TS,
+            TS,PRISMA,
             FRAMER,
             RADIX,
-            PRISMA,
+            
         ],
         webLink:
             "https://url-shortening-api-nine.vercel.app/",

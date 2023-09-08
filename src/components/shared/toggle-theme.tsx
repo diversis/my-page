@@ -72,14 +72,6 @@ function MUISwitch(props: UseSwitchParameters) {
 
 	return (
 		<span className='inline-flex relative w-8 h-8 justify-center items-center'>
-			{/* <span
-				className={`relative w-16 h-16 animate-pulse ${
-					checked
-						? "before:opacity-100 after:opacity-0"
-						: "before:opacity-0 after:opacity-100"
-				} before:absolute before:duration-500 before:from-accent-400/50 before:transition-opacity before:inset-0 before:bg-gradient-radial before:via-transparent before:to-transparent before:rounded-[50%]
-				after:duration-500 after:transition-opacity after:from-secondary-500/25 after:absolute after:inset-0 after:bg-gradient-radial after:via-transparent after:to-transparent after:rounded-[50%]
-				`}></span> */}
 			<span
 				className={`absolute inset-x-0 top-0 aspect-square block`}>
 				<span className='absolute inset-0'>
@@ -92,7 +84,7 @@ function MUISwitch(props: UseSwitchParameters) {
 								variants={
 									THEME_TOGGLE_VARIANTS
 								}
-								key='light-mode-icon'
+								key='sun-icon'
 								className={`absolute -inset-x-full top-0 aspect-square flex justify-center `}>
 								<span className='absolute inset-x-auto top-0 before:animate-pulse before:absolute before:duration-500 before:w-16 before:h-16 before:from-accent-400/50 before:transition-opacity before:-top-5 before:-left-8 before:bg-gradient-radial before:via-transparent before:to-transparent before:rounded-[50%]'></span>
 								<LightModeIcon
@@ -109,10 +101,9 @@ function MUISwitch(props: UseSwitchParameters) {
 								variants={
 									THEME_TOGGLE_VARIANTS
 								}
-								key='dark-mode-icon'
+								key='moon-icon'
 								className={`absolute  -inset-x-full top-0 aspect-square flex justify-center `}>
 								<span className='absolute inset-x-auto top-0 before:animate-pulse before:absolute before:duration-500 before:w-16 before:h-16 before:from-secondary-400/50 before:transition-opacity before:-top-5 before:-left-8 before:bg-gradient-radial before:via-transparent before:to-transparent before:rounded-[50%]'></span>
-
 								<DarkModeIcon
 									width={16}
 									height={16}
@@ -128,7 +119,7 @@ function MUISwitch(props: UseSwitchParameters) {
 				aria-label={`Switch to ${
 					checked ? "light" : "dark"
 				} theme`}
-				className='peer absolute inset-0 opacity-0 z-0 m-0 cursor-pointer'
+				className='peer absolute inset-0 -top-1 w-full h-full opacity-0 z-0 m-0 cursor-pointer'
 			/>
 			<span className='absolute  inset-x-0 -top-1 bottom-1 rounded-[50%] pointer-events-none peer-focus-visible:outline-double peer-focus-visible:outline-1 peer-focus-visible:border peer-focus-visible:outline-black border-white'></span>
 		</span>
