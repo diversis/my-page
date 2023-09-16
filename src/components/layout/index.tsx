@@ -9,12 +9,13 @@ import {
 } from "react";
 import { Playfair_Display } from "next/font/google";
 
-import Meta from "./meta";
-import Header from "./header";
-import Mouse from "./mouse";
-import MouseClick from "./click";
-import Footer from "./footer";
-import Filters from "../shared/filters";
+import Meta from "./Meta";
+import Header from "./Header";
+import Mouse from "./Mouse";
+import MouseClick from "./Click";
+import Footer from "./Footer";
+import Filters from "../shared/Filters";
+import { useModal } from "@/lib/hooks/use-modal";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
 
@@ -23,6 +24,10 @@ export default function Layout({
 }: {
 	children: ReactNode;
 }) {
+	const { show } = useModal((state) => ({
+		show: state.show,
+	}));
+
 	const ref = useRef<HTMLDivElement>(null);
 	const [clicks, setClicks] = useState<
 		| {
@@ -69,6 +74,12 @@ export default function Layout({
 		);
 	};
 
+	useEffect(() => {
+		document.body.className = show
+			? "overflow-hidden"
+			: "";
+	}, [show]);
+
 	return (
 		<>
 			<Meta />
@@ -84,15 +95,11 @@ export default function Layout({
 				id='layout'>
 				<Filters />
 				<Header />
-				{/* <BodyBG /> */}
 				<Mouse mousePosition={mousePosition} />
 				<MouseClick clicks={clicks} />
-				{/* <AnimatePresence>
-					{clicked ? <m.div></m.div> : null}
-				</AnimatePresence> */}
 				<div id='page-top' />
 				<main
-					className={`z-10 flex min-h-screen [&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>
+					className={`z-10 flex overflow-x-hidden min-h-screen [&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>
 					{children}
 				</main>
 				<Footer />

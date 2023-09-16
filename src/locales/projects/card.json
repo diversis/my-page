@@ -1,0 +1,12 @@
+{
+	"ru-RU": {
+		"stack": "стэк",
+		"web": "страница в интернет",
+		"github": "репозиторий на github"
+	},
+	"en-US": {
+		"stack": "stack",
+		"web": "web page",
+		"github": "github repository"
+	}
+}

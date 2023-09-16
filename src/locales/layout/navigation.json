@@ -1,0 +1,14 @@
+{
+    "ru-RU": {
+        "Home": "Главная",
+        "Catalogue": "Каталог",
+        "Profile": "Личный кабинет",
+        "Dashboard": "Панель управления"
+    },
+    "en-US": {
+        "Home": "Home",
+        "Catalogue": "Catalogue",
+        "Profile": "Profile",
+        "Dashboard": "Dashboard"
+    }
+}

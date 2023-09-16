@@ -1,18 +1,23 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
-import { OPACITY_VARIANTS } from "@/lib/constants/variants";
-import { Project } from "@/lib/constants/projects";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
+
+import { Project } from "@/lib/constants/projects";
+import { OPACITY_VARIANTS } from "@/lib/constants/variants";
+
+const localeData = require("@/locales/projects/card.json");
 
 export default function ProjectCard({
 	project,
 }: {
 	project: Project;
 }) {
+	const { locale, locales, defaultLocale, asPath } =
+		useRouter();
 	const ref = useRef(null);
 	const isInView = useInView(ref);
 	const Hosting = project.hosting.Icon;
@@ -40,17 +45,20 @@ export default function ProjectCard({
 			</div>
 			<div className='grid grid-cols-[auto_1fr] h-min gap-2 place-items-center justify-items-start'>
 				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
-					Tech used:
+					{locale
+						? localeData[locale].stack
+						: "Stack"}
+					:
 				</h5>
-				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
+				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors flex-wrap p-2 rounded'>
 					{project.tech.map(({ name, Icon }) => {
 						// const Icon = icon;
 						return (
 							<div
 								key={`tech-${name}`}
-								className='inline-flex'>
+								className='inline-flex icon-button icon-button-primary relative button-rounded-full'>
 								<Tooltip
-									disableFocusListener
+									// disableFocusListener
 									title={name}>
 									<button>
 										<Icon
@@ -65,14 +73,17 @@ export default function ProjectCard({
 					})}
 				</div>
 				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
-					Web Page:
+					{locale
+						? localeData[locale].web
+						: "web page"}
+					:
 				</h5>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
 					<a
 						href={project.webLink}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='inline-flex items-center gap-1'>
+						className='inline-flex items-center gap-1 icon-button icon-button-primary relative button-rounded-full'>
 						<Hosting
 							width={32}
 							height={32}
@@ -85,14 +96,17 @@ export default function ProjectCard({
 					</a>
 				</div>
 				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
-					GitHub Page:
+					{locale
+						? localeData[locale].github
+						: "github repository"}
+					:
 				</h5>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
 					<a
 						href={project.gitHub}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='inline-flex items-center gap-1'>
+						className='inline-flex items-center gap-1 icon-button icon-button-primary relative button-rounded-full'>
 						<GitHubIcon
 							width={32}
 							height={32}

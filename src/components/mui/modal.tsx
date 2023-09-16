@@ -1,9 +1,16 @@
 import { Modal, Button } from "@mui/base";
 import { m } from "framer-motion";
-import { ReactNode, forwardRef } from "react";
+import {
+	ReactNode,
+	forwardRef,
+	useEffect,
+	useMemo,
+} from "react";
 import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
+import { useModal } from "@/lib/hooks/use-modal";
+import { randomUUID } from "crypto";
 
 export type MUIBaseModalProps = {
 	title: string;
@@ -25,6 +32,19 @@ export default function MUIBaseModal({
 	handleClose,
 	...props
 }: MUIBaseModalProps) {
+	const { show, addModal, removeModal } = useModal(
+		(state) => ({
+			show: state.show,
+			addModal: state.addModal,
+			removeModal: state.removeModal,
+		})
+	);
+
+	useEffect(() => {
+		if (open) addModal({ key: title });
+		else removeModal({ key: title });
+	}, [open]);
+
 	return (
 		<div>
 			<Modal
@@ -45,7 +65,7 @@ export default function MUIBaseModal({
 						}`}>
 						<Button
 							onClick={handleClose}
-							className=' button button-primary !absolute rounded-[50%] w-8 h-8 shadow-inner shadow-surface-50 flex items-center bg-tertiary-800 dark:bg-tertiary-500 -top-2 -right-2 group/close active:scale-90 transition-transform'>
+							className='button button-primary button-rounded-full absolute rounded-[50%] w-8 h-8 shadow-inner shadow-surface-50 flex items-center bg-tertiary-800 dark:bg-tertiary-500 -top-2 -right-2 group/close active:scale-90 transition-transform'>
 							<CloseIcon
 								sx={{
 									width: "32px",

@@ -1,0 +1,22 @@
+{
+	"ru-RU": {
+		"title": "Моя страница",
+		"content": [
+			{
+				"title": "Моя страница",
+				"synopsis": "Ага, да.",
+				"imageUrl": ""
+			}
+		]
+	},
+	"en-US": {
+		"title": "My page",
+		"content": [
+			{
+				"title": "My page",
+				"synopsis": "page",
+				"imageUrl": ""
+			}
+		]
+	}
+}

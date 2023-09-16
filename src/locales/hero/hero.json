@@ -1,0 +1,20 @@
+{
+	"ru-RU": {
+		"title": "Моя страница",
+		"content": {
+			"title": "Diversis",
+			"text": "Начинающий веб-разработчик",
+			"contact": "Связаться со мной",
+			"projects": "Мои работы"
+		}
+	},
+	"en-US": {
+		"title": "My page",
+		"content": {
+			"title": "Diversis",
+			"text": "Beginner web developer",
+			"contact": "Contact me",
+			"projects": "My Work"
+		}
+	}
+}

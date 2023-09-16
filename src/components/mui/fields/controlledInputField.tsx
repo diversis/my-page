@@ -45,7 +45,7 @@ export const ControlledInputField = <
 						{...rest}
 					/>
 					{error ? (
-						<span className='p-1 text-xs lg:text-sm text-error-600'>
+						<span className='p-1 text-xs lg:text-sm text-error-600 break-words'>
 							{error.message}
 						</span>
 					) : null}

@@ -43,7 +43,7 @@ export default function ToggleTheme() {
 	if (!mounted) return null;
 
 	return (
-		<div className='flex flex-row items-center gap-0'>
+		<div className='flex flex-row items-center gap-0 mx-6 mt-2'>
 			<MUISwitch
 				checked={resolvedTheme === "light"}
 				onChange={async () =>

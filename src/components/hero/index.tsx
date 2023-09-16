@@ -5,8 +5,9 @@ import {
 	useScroll,
 } from "framer-motion";
 import { useRef, useState } from "react";
-import CTA from "./cta";
-import Hero from "./image";
+
+import CTA from "./CTA";
+import Hero from "./Image";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
 
 export default function HeroSection() {

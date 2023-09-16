@@ -4,8 +4,10 @@ import AboutSection from "@/components/about";
 import HeroSection from "@/components/hero";
 import ProjectsDisplay from "@/components/projects";
 import Link from "next/link";
+import { GetServerSideProps } from "next";
 
-export default function Home() {
+export default function Home({ data }: { data: JSON }) {
+
 	return (
 		<>
 			<>

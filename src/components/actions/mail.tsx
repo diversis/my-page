@@ -15,34 +15,26 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ControlledInputField } from "../mui/fields/controlledInputField";
+import { ControlledInputField } from "../mui/fields/ControlledInputField";
 import { STAGGER_VARIANTS } from "@/lib/constants/variants";
-import AnimatedDiv from "../shared/animatedDiv";
+import AnimatedDiv from "../shared/AnimatedDiv";
+import { Button } from "@mui/base";
+import { useRouter } from "next/router";
 
-const endpoint = "/api/review";
+const endpoint = "/api/sendmail";
 
+const localeFormData = require("@/locales/modals/contact.json");
+const localeModalData = require("@/locales/modals/buttons.json");
 interface MailFields {
 	name: string;
 	email: string;
-	text: string;
+	message: string;
 }
 
 interface MailModalProps
 	extends ComponentPropsWithoutRef<"div"> {
 	handleClose: () => Promise<void>;
 }
-
-const schema = z.object({
-	name: z
-		.string()
-		.min(3, "Review must include at least 3 characters")
-		.max(1200, "Review too long (1200 characters max)"),
-	email: z.string().email(),
-	text: z
-		.string()
-		.min(3, "Text must include at least 3 characters")
-		.max(1200, "Text too long (1200 characters max)"),
-});
 
 async function sendFormData({
 	data,
@@ -63,6 +55,34 @@ export default function MailForm({
 	handleClose,
 	...rest
 }: MailModalProps) {
+	const { locale, locales, defaultLocale, asPath } =
+		useRouter();
+	const resolvedLocale = locale || "ru-RU";
+	const schema = z.object({
+		name: z
+			.string()
+			.min(
+				3,
+				localeFormData[resolvedLocale].form.name
+					.error.min
+			)
+			.max(50, localeFormData[resolvedLocale].form.name
+				.error.max),
+		email: z.string().email(),
+		message: z
+			.string()
+			.min(
+				3,
+				localeFormData[resolvedLocale].form.message
+					.error.min
+			)
+			.max(
+				1200,
+				localeFormData[resolvedLocale].form.message
+					.error.max
+			),
+	});
+
 	const { enqueueSnackbar, closeSnackbar } =
 		useSnackbar();
 
@@ -88,7 +108,7 @@ export default function MailForm({
 		defaultValues: {
 			name: "",
 			email: "",
-			text: "",
+			message: "",
 		},
 	});
 
@@ -103,12 +123,8 @@ export default function MailForm({
 				url: endpoint,
 			});
 			if (response.status) {
-				console.log(
-					"response.status ",
-					response.status
-				);
 				enqueueSnackbar({
-					message: "Your review was posted",
+					message: localeFormData[resolvedLocale].form.toast.success,
 					variant: "success",
 					autoHideDuration: 6000,
 				});
@@ -129,7 +145,7 @@ export default function MailForm({
 	};
 
 	const onError: SubmitErrorHandler<MailFields> = (
-		{ name, email, text },
+		{ name, email, message: text },
 		e
 	) => {
 		try {
@@ -157,62 +173,118 @@ export default function MailForm({
 			initial='hidden'
 			animate='visible'
 			exit='hidden'
-			className='relative w-full flex min-w-[20rem] flex-col gap-y-4  '
+			className='relative w-full flex min-w-[20rem] flex-col gap-4  '
 			onSubmit={handleSubmit(onSubmit, onError)}>
+			<div className='relative w-full grid gap-4  '>
+				<AnimatedDiv
+				classNameWrapper="[grid-area:1/1/2/2]"
+					direction='left'
+					className='flex flex-row gap-4 flex-wrap items-center w-full '>
+					<label
+						htmlFor='name'
+						className='w-[11ch]'>
+						{
+							localeFormData[resolvedLocale]
+								.form.name.label
+						}
+					</label>
+				</AnimatedDiv>
+				<AnimatedDiv
+				classNameWrapper="[grid-area:2/1/3/2]"
+					direction='right'
+					className='flex flex-row gap-4 flex-wrap items-center '>
+					<label
+						htmlFor='email'
+						className='w-[11ch]'>
+						{
+							localeFormData[resolvedLocale]
+								.form.email.label
+						}
+					</label>
+				</AnimatedDiv>
+				<AnimatedDiv
+				classNameWrapper="[grid-area:3/1/4/2]"
+					direction='bottom'
+					className='flex flex-row gap-4 flex-wrap items-center'>
+					<label
+						htmlFor='text'
+						className='w-[11ch]'>
+						{
+							localeFormData[resolvedLocale]
+								.form.message.label
+						}
+					</label>
+				</AnimatedDiv>
+
+				<AnimatedDiv
+				classNameWrapper="[grid-area:1/2/2/3]"
+					direction='left'
+					className='flex flex-row gap-4 flex-wrap items-center w-full '>
+					<span className='flex-grow'>
+						<ControlledInputField
+							name='name'
+							control={control}
+							label='Name'
+							className='flex-grow w-full'
+						/>
+					</span>
+				</AnimatedDiv>
+				<AnimatedDiv
+				classNameWrapper="[grid-area:2/2/3/3]"
+					direction='right'
+					className='flex flex-row gap-4 flex-wrap items-center'>
+					<span className='flex-grow'>
+						<ControlledInputField
+							name='email'
+							control={control}
+							label='Email'
+							className='flex-grow w-full'
+						/>
+					</span>
+				</AnimatedDiv>
+				<AnimatedDiv
+				classNameWrapper="[grid-area:3/2/4/3]"
+					direction='bottom'
+					className='flex flex-row gap-4 flex-wrap items-center'>
+					<span className='flex-grow'>
+						<ControlledInputField
+							name='message'
+							control={control}
+							label='Message'
+							className='flex-grow  w-full'
+							multiline={true}
+						/>
+					</span>
+				</AnimatedDiv>
+			</div>
 			<AnimatedDiv
-				direction='left'
-				className='flex flex-row gap-4 flex-wrap items-center w-full'>
-				<label
-					htmlFor='name'
-					className='w-[6ch]'>
-					Name
-				</label>
-				<hr className='divider-v h-5' />
-				<span className='flex-grow'>
-					<ControlledInputField
-						name='name'
-						control={control}
-						label='Name'
-						className='flex-grow w-full'
-					/>
-				</span>
-			</AnimatedDiv>
-			<AnimatedDiv
-				direction='right'
-				className='flex flex-row gap-4 flex-wrap items-center'>
-				<label
-					htmlFor='email'
-					className='w-[6ch]'>
-					Email
-				</label>
-				<hr className='divider-v h-5' />
-				<span className='flex-grow'>
-					<ControlledInputField
-						name='email'
-						control={control}
-						label='Email'
-						className='flex-grow w-full'
-					/>
-				</span>
-			</AnimatedDiv>
-			<AnimatedDiv
+				overflowHidden={false}
 				direction='bottom'
-				className='flex flex-row gap-4 flex-wrap items-center'>
-				<label
-					htmlFor='text'
-					className='w-[6ch]'>
-					Text
-				</label>
-				<hr className='divider-v h-5' />
-				<span className='flex-grow'>
-					<ControlledInputField
-						name='text'
-						control={control}
-						label='text'
-						className='flex-grow  w-full'
-						multiline={true}
-					/>
-				</span>
+				className='mt-2 lg:mt-4 flex flex-row flex-wrap mr-0 ml-auto w-fit gap-4 lg:gap-8'>
+				<AnimatedDiv
+					overflowHidden={false}
+					direction='bottom'>
+					<Button
+						onClick={handleClose}
+						className='button button-tertiary button-rounded-lg relative'>
+						{
+							localeModalData[resolvedLocale]
+								.cancel
+						}
+					</Button>
+				</AnimatedDiv>
+				<AnimatedDiv
+					overflowHidden={false}
+					direction='bottom'>
+					<Button
+						type='submit'
+						className='button button-primary button-rounded-lg relative'>
+						{
+							localeModalData[resolvedLocale]
+								.submit
+						}
+					</Button>
+				</AnimatedDiv>
 			</AnimatedDiv>
 		</m.form>
 	);

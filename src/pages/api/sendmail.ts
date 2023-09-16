@@ -7,46 +7,74 @@ import {
 	ZodObject,
 } from "zod";
 import 'dotenv/config'
+
+import { logger } from "@/lib/utils/logger";
+import { sendTeleMessage } from '@/lib/grammy';
+
 const nodemailer = require("nodemailer")
 
-import { pino } from "@/lib/utils/logger";
-const emailLogger = pino.child({ origin: "API Email" });
+
+const emailLogger = logger.child({ origin: "API Email" });
+
+
+
 
 const schema = z.object({
 	name: z
 		.string()
-		.min(
-			3,
-			"Поле 'Имя' должно содержать от 3 до 40 символов"
-		)
-		.max(
-			40,
-			"Поле 'Имя' должно содержать от 3 до 40 символов"
-		),
-	email: z
+		.min(3, "Name must include at least 3 characters")
+		.max(50, "Name too long (50 characters max)"),
+	email: z.string().email(),
+	message: z
 		.string()
-		.email("Неверный Email адрес")
-		.nonempty("Поле 'Email' обязательно к заполнению"),
+		.min(3, "Message must include at least 3 characters")
+		.max(1200, "Message too long (1200 characters max)"),
 });
 
 
-type Data = {
-  name: string
-}
-
 let transporter = nodemailer.createTransport({
-  host: "smtp.yandex.ru",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.YAMAIL,
-    pass: process.env.YAPASSWORD
-  }
+	host: "smtp.yandex.ru",
+	port: 465,
+	secure: true,
+	auth: {
+		user: process.env.YAMAIL,
+		pass: process.env.YAPASSWORD
+	}
 })
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
+	if (req.method === "POST") {
+		try {
+			schema.parse(req.body)
+			const { name, email, message } = req.body
+
+			const botRes = sendTeleMessage({ message: `Received: \n ${message} \n from email: ${email}` })
+
+			const info = await transporter.sendMail({
+				from: process.env.YAMAIL, // sender address
+				to: "angelnoxy@yandex.ru", // list of receivers
+				subject: `My Page : ${email}`, // Subject line
+				text: `${message} , from email: ${email}`, // plain text body
+				html: `<div style='display:flex;flex-direction:column;gap:8px'><h1 style='font-size:1.3rem'>Received message</h1><span>from: ${email}</span><p style='margin-top:12px'>${message}</p></div>`, // html body
+			});
+
+			res.status(200).json(info)
+		}
+		catch (e: unknown) {
+			if (e instanceof ZodError) {
+				logger.info(e.errors);
+
+				// logger.info([...Object.values(e.errors)]);
+				res.status(400).json([...e.errors]);
+			} else {
+				logger.info(e);
+				res.status(400).json(JSON.stringify(e));
+			}
+
+			return;
+		}
+	}
 }

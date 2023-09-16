@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	transpilePackages: ["three"],
 	async redirects() {
 		return [
 			{
@@ -12,10 +11,10 @@ const nextConfig = {
 		];
 	},
 	i18n: {
-        locales: ["default", "en-US", "ru-RU"],
-        defaultLocale: "ru-RU",
-        localeDetection: true,
-    },
+		locales: ["default", "en-US", "ru-RU"],
+		defaultLocale: "ru-RU",
+		localeDetection: true,
+	},
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/i,

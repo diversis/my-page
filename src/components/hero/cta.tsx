@@ -18,17 +18,20 @@ import {
 	useTransform,
 } from "framer-motion";
 import Link from "next/link";
-import { Lobster } from "next/font/google";
+import { Permanent_Marker } from "next/font/google";
 
 import Balancer from "react-wrap-balancer";
-import AnimatedDiv from "@/components/shared/animatedDiv";
+import AnimatedDiv from "@/components/shared/AnimatedDiv";
 import { useWindowSize } from "usehooks-ts";
 import { Button } from "@mui/base";
-import MUIBaseModal from "../mui/modal";
-import MailForm from "../actions/mail";
+import MUIBaseModal from "../mui/Modal";
+import MailForm from "../actions/Mail";
+import { useRouter } from "next/router";
 
-const lobster = Lobster({
-	subsets: ["latin", "cyrillic"],
+const localeData = require("@/locales/hero/hero.json");
+
+const permanentMarker = Permanent_Marker({
+	subsets: ["latin"],
 	weight: "400",
 });
 
@@ -39,6 +42,8 @@ export default function CTA({
 	containerVisible?: boolean;
 	mousePosition: { x: number; y: number };
 }) {
+	const { locale, locales, defaultLocale, asPath } =
+		useRouter();
 	const ref = useRef(null);
 	const isInView = useInView(ref);
 	const [open, setOpen] = useState(false);
@@ -98,8 +103,12 @@ export default function CTA({
 						}% ${resY.get() * 50 + 50}%`,
 					}}
 					tabIndex={0}
-					className={`spicy bg-gradient-radial dark:from-secondary-400 dark:via-accent-400 dark:to-primary-400 from-primary-500 via-secondary-500 to-accent-400 relative bg-[size:200%_200%] bg-no-repeat text-[15vw] font-black tracking-widest transition-[background-position] delay-100 duration-[2s] ease-out  will-change-[background-position] lg:text-[12vw] ${lobster.className}`}>
-					Hello!
+					className={`spicy bg-gradient-radial dark:from-secondary-400 dark:via-accent-400 dark:to-primary-400 from-primary-500 via-secondary-500 to-accent-400 relative bg-[size:200%_200%] bg-no-repeat text-[10vw] font-black tracking-widest transition-[background-position] delay-100 duration-[2s] ease-out  will-change-[background-position] lg:text-[9vw] ${permanentMarker.className}`}>
+					{locale
+						? localeData[
+								locale
+						  ].content.title.toUpperCase()
+						: "TITLE"}
 				</m.h1>
 			</AnimatedDiv>
 			<AnimatedDiv variants={SUBTITLE_VARIANTS}>
@@ -107,16 +116,20 @@ export default function CTA({
 					tabIndex={0}
 					className='text-shadow max-w-[50ch] text-center text-lg lg:text-xl xl:text-left xl:text-2xl'>
 					<Balancer ratio={0.5}>
-						I&rsquo;m diversis - beginner web
-						developer
+						{locale
+							? localeData[locale].content
+									.text
+							: "text"}
 					</Balancer>
 				</m.p>
 			</AnimatedDiv>
-			<div className='flex flex-row flex-wrap gap-4 lg:gap-8 xl:gap-12 w-full justify-center'>
+			<div className='flex flex-col flex-wrap md:flex-row items-center gap-2 md:gap-4 lg:gap-8 xl:gap-12 w-full justify-center'>
 				<Button
 					onClick={handleOpen}
-					className='h5 button button-primary'>
-					Contact Me
+					className='h5 button button-primary button-rounded-lg relative'>
+					{locale
+						? localeData[locale].content.contact
+						: "contact"}
 				</Button>
 				<MUIBaseModal
 					open={open}
@@ -127,8 +140,11 @@ export default function CTA({
 				</MUIBaseModal>
 				<Button
 					onClick={handleClick}
-					className='h5 button button-tertiary'>
-					My Work
+					className='h5 button button-tertiary button-rounded-lg relative'>
+					{locale
+						? localeData[locale].content
+								.projects
+						: "projects"}
 				</Button>
 			</div>
 		</m.div>

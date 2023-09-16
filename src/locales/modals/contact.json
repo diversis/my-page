@@ -1,0 +1,56 @@
+{
+	"ru-RU": {
+		"title": "Связаться со мной",
+		"form": {
+			"name": {
+				"label": "Имя",
+				"error": {
+					"min": "Поле 'Имя' должно содержать не менее 3-х символов",
+					"max": "Поле 'Имя' должно содержать не более 50 символов"
+				}
+			},
+			"email": {
+				"label": "e-mail",
+				"error": "e-mail введен неверно"
+			},
+			"message": {
+				"label": "Сообщение",
+				"error": {
+					"min": "Поле 'Сообщение' должно содержать не менее 3-х символов",
+					"max": "Поле 'Сообщение' должно содержать не более 1200 символов"
+				}
+			},
+			"toast": {
+				"success": "Спасибо! Ваше сообщение успешно отправлено",
+				"error": ""
+			}
+		}
+	},
+	"en-US": {
+		"title": "Contact me",
+		"form": {
+			"name": {
+				"label": "Name",
+				"error": {
+					"min": "Name must include at least 3 characters",
+					"max": "Name too long (1200 characters max)"
+				}
+			},
+			"email": {
+				"label": "e-mail",
+				"error": "Invalid e-mail"
+			},
+			"message": {
+				"label": "Message",
+				"error": {
+					"min": "Message must include at least 3 characters",
+					"max": "Message too long (1200 characters max)"
+				}
+			},
+			"toast": {
+				"success": "Thank you! Your message was sent successfully",
+				"error": ""
+			}
+		}
+	}
+}

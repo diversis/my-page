@@ -113,6 +113,7 @@ export const TITLE_VARIANTS: Variants = {
             type: "tween",
             ease: "easeOut",
         },
+
     },
     exit: {
         maskImage:
@@ -159,6 +160,7 @@ export const SUBTITLE_VARIANTS: Variants = {
             type: "tween",
             ease: "easeOut",
         },
+
     },
     exit: {
         maskImage:

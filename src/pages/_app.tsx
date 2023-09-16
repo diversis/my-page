@@ -79,37 +79,39 @@ export default function App({
 											0
 										)
 									}>
-									{!loading ? (
-										<m.div
-											key='main-wrap'
-											initial={{
-												opacity: 0,
-												translateX:
-													"-100%",
-											}}
-											animate={{
-												opacity: 1,
-												translateX:
-													"0%",
-											}}
-											exit={{
-												opacity: 0,
-												translateX:
-													"100%",
-												transition:
-													{
-														duration: 0.5,
-													},
-											}}
-											transition={{
+									<m.div
+										key={`wrap-${router.asPath}`}
+										initial={{
+											opacity: 0,
+
+											translateX:
+												"-100%",
+										}}
+										animate={{
+											opacity: 1,
+
+											translateX:
+												"0%",
+										}}
+										exit={{
+											opacity: 0,
+
+											translateX:
+												"100%",
+											transition: {
 												duration: 0.5,
-											}}
-											className='flex h-full w-full flex-col items-center'>
-											<Component
-												{...pageProps}
-											/>
-										</m.div>
-									) : null}
+											},
+										}}
+										transition={{
+											type: "tween",
+											easing: "easeOut",
+											duration: 1,
+										}}
+										className='flex h-full w-full flex-col items-center'>
+										<Component
+											{...pageProps}
+										/>
+									</m.div>
 								</AnimatePresence>
 							</Layout>
 						</RWBProvider>

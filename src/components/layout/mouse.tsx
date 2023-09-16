@@ -1,5 +1,4 @@
 import { m } from "framer-motion";
-import { SetStateAction, useState, Dispatch } from "react";
 
 export default function SVGMouse({
 	mousePosition,
