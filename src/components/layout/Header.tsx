@@ -8,7 +8,7 @@ import ToggleTheme from "../shared/ToggleTheme";
 import ScrollTop from "./ScrollTop";
 import { useIsClient, useWindowSize } from "usehooks-ts";
 import SwitchLocale from "./SwitchLocale";
-import MobileMenu from "./mobileMenu";
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
 	const { width } = useWindowSize();
