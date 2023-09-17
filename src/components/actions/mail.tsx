@@ -15,7 +15,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ControlledInputField } from "../mui/fields/ControlledInputField";
+import { ControlledInputField } from "@/components/mui/fields/ControlledInputField";
 import { STAGGER_VARIANTS } from "@/lib/constants/variants";
 import AnimatedDiv from "../shared/AnimatedDiv";
 import { Button } from "@mui/base";
