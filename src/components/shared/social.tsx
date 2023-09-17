@@ -64,7 +64,7 @@ export default function Social() {
 			variants={STAGGER_VARIANTS}
 			animate={isInView ? "visible" : "exit"}
 			exit='exit'
-			className='flex flex-row items-center gap-4 xl:items-start xl:gap-6'>
+			className='flex flex-col lg:flex-row items-center gap-4 xl:items-start xl:gap-6'>
 			{socialLinks.length > 0 &&
 				socialLinks.map((item) => {
 					return (

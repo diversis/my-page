@@ -29,6 +29,7 @@ import MailForm from "../actions/Mail";
 import { useRouter } from "next/router";
 
 const localeData = require("@/locales/hero/hero.json");
+const localeFormData = require("@/locales/modals/contact.json");
 
 const permanentMarker = Permanent_Marker({
 	subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function CTA({
 }) {
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
+	const resolvedLocale = locale || "ru-RU";
 	const ref = useRef(null);
 	const isInView = useInView(ref);
 	const [open, setOpen] = useState(false);
@@ -104,47 +106,46 @@ export default function CTA({
 					}}
 					tabIndex={0}
 					className={`spicy bg-gradient-radial dark:from-secondary-400 dark:via-accent-400 dark:to-primary-400 from-primary-500 via-secondary-500 to-accent-400 relative bg-[size:200%_200%] bg-no-repeat text-[10vw] font-black tracking-widest transition-[background-position] delay-100 duration-[2s] ease-out  will-change-[background-position] lg:text-[9vw] ${permanentMarker.className}`}>
-					{locale
-						? localeData[
-								locale
-						  ].content.title.toUpperCase()
-						: "TITLE"}
+					{localeData[
+						resolvedLocale
+					].content.title.toUpperCase()}
 				</m.h1>
 			</AnimatedDiv>
 			<AnimatedDiv variants={SUBTITLE_VARIANTS}>
 				<m.p
 					tabIndex={0}
 					className='text-shadow max-w-[50ch] text-center text-lg lg:text-xl xl:text-left xl:text-2xl'>
-					<Balancer ratio={0.5}>
-						{locale
-							? localeData[locale].content
-									.text
-							: "text"}
-					</Balancer>
+					{
+						localeData[resolvedLocale].content
+							.text
+					}
 				</m.p>
 			</AnimatedDiv>
 			<div className='flex flex-col flex-wrap md:flex-row items-center gap-2 md:gap-4 lg:gap-8 xl:gap-12 w-full justify-center'>
 				<Button
 					onClick={handleOpen}
 					className='h5 button button-primary button-rounded-lg relative'>
-					{locale
-						? localeData[locale].content.contact
-						: "contact"}
+					{
+						localeData[resolvedLocale].content
+							.contact
+					}
 				</Button>
 				<MUIBaseModal
 					open={open}
 					handleClose={handleClose}
-					title='Contact me'
+					title={
+						localeFormData[resolvedLocale].title
+					}
 					className=''>
 					<MailForm handleClose={handleClose} />
 				</MUIBaseModal>
 				<Button
 					onClick={handleClick}
 					className='h5 button button-tertiary button-rounded-lg relative'>
-					{locale
-						? localeData[locale].content
-								.projects
-						: "projects"}
+					{
+						localeData[resolvedLocale].content
+							.projects
+					}
 				</Button>
 			</div>
 		</m.div>

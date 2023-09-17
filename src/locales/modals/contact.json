@@ -3,14 +3,14 @@
 		"title": "Связаться со мной",
 		"form": {
 			"name": {
-				"label": "Имя",
+				"label": "Ваше имя",
 				"error": {
 					"min": "Поле 'Имя' должно содержать не менее 3-х символов",
 					"max": "Поле 'Имя' должно содержать не более 50 символов"
 				}
 			},
 			"email": {
-				"label": "e-mail",
+				"label": "Ваш e-mail",
 				"error": "e-mail введен неверно"
 			},
 			"message": {
@@ -30,14 +30,14 @@
 		"title": "Contact me",
 		"form": {
 			"name": {
-				"label": "Name",
+				"label": "Your name",
 				"error": {
 					"min": "Name must include at least 3 characters",
 					"max": "Name too long (1200 characters max)"
 				}
 			},
 			"email": {
-				"label": "e-mail",
+				"label": "Your e-mail",
 				"error": "Invalid e-mail"
 			},
 			"message": {

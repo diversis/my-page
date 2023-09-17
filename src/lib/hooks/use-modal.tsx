@@ -23,7 +23,7 @@ export const useModal = create<State & Action>((set) => ({
 			const newModals = state.modals.filter(
 				(stateKey) => key !== stateKey
 			);
-			console.log(newModals);
+
 			return {
 				show: newModals.length > 0 ? true : false,
 				modals: newModals,
