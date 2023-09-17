@@ -108,7 +108,7 @@ export default function CTA({
 					className={`spicy bg-gradient-radial dark:from-secondary-400 dark:via-accent-400 dark:to-primary-400 from-primary-500 via-secondary-500 to-accent-400 relative bg-[size:200%_200%] bg-no-repeat text-[10vw] font-black tracking-widest transition-[background-position] delay-100 duration-[2s] ease-out  will-change-[background-position] lg:text-[9vw] ${permanentMarker.className}`}>
 					{localeData[
 						resolvedLocale
-					].content.title.toUpperCase()}
+					]?.content?.title?.toUpperCase()}
 				</m.h1>
 			</AnimatedDiv>
 			<AnimatedDiv variants={SUBTITLE_VARIANTS}>
@@ -116,8 +116,8 @@ export default function CTA({
 					tabIndex={0}
 					className='text-shadow max-w-[50ch] text-center text-lg lg:text-xl xl:text-left xl:text-2xl'>
 					{
-						localeData[resolvedLocale].content
-							.text
+						localeData[resolvedLocale]?.content
+							?.text
 					}
 				</m.p>
 			</AnimatedDiv>
@@ -126,15 +126,16 @@ export default function CTA({
 					onClick={handleOpen}
 					className='h5 button button-primary button-rounded-lg relative'>
 					{
-						localeData[resolvedLocale].content
-							.contact
+						localeData[resolvedLocale]?.content
+							?.contact
 					}
 				</Button>
 				<MUIBaseModal
 					open={open}
 					handleClose={handleClose}
 					title={
-						localeFormData[resolvedLocale].title
+						localeFormData[resolvedLocale]
+							?.title
 					}
 					className=''>
 					<MailForm handleClose={handleClose} />
@@ -143,8 +144,8 @@ export default function CTA({
 					onClick={handleClick}
 					className='h5 button button-tertiary button-rounded-lg relative'>
 					{
-						localeData[resolvedLocale].content
-							.projects
+						localeData[resolvedLocale]?.content
+							?.projects
 					}
 				</Button>
 			</div>

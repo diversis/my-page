@@ -195,7 +195,7 @@ export default function MailForm({
 						className='w-[11ch]'>
 						{
 							localeFormData[resolvedLocale]
-								.form.name.label
+								?.form?.name.label
 						}
 					</label>
 				</AnimatedDiv>
@@ -208,7 +208,7 @@ export default function MailForm({
 						className='w-[11ch]'>
 						{
 							localeFormData[resolvedLocale]
-								.form.email.label
+								?.form?.email.label
 						}
 					</label>
 				</AnimatedDiv>
@@ -221,7 +221,7 @@ export default function MailForm({
 						className='w-[11ch]'>
 						{
 							localeFormData[resolvedLocale]
-								.form.message.label
+								?.form?.message.label
 						}
 					</label>
 				</AnimatedDiv>
@@ -279,7 +279,7 @@ export default function MailForm({
 						className='button button-tertiary button-rounded-lg relative'>
 						{
 							localeModalData[resolvedLocale]
-								.cancel
+								?.cancel
 						}
 					</Button>
 				</AnimatedDiv>
@@ -291,7 +291,7 @@ export default function MailForm({
 						className='button button-primary button-rounded-lg relative'>
 						{
 							localeModalData[resolvedLocale]
-								.submit
+								?.submit
 						}
 					</Button>
 				</AnimatedDiv>

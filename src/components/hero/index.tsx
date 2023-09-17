@@ -11,14 +11,10 @@ import Hero from "./Image";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
 
 export default function HeroSection() {
+	
 	const ref = useRef<HTMLDivElement>(null);
-	const { scrollY, scrollYProgress } = useScroll({
-		target: ref,
-		offset: ["end end", "end start"],
-	});
+
 	const isInView = useInView(ref);
-	const [mouseX, setMouseX] = useState<number>(0);
-	const [mouseY, setMouseY] = useState<number>(0);
 	const [mousePosition, setMousePosition] = useState<{
 		x: number;
 		y: number;

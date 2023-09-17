@@ -64,7 +64,7 @@ export default function SVGMouse({
 				}}
 				transition={{
 					type: "tween",
-					duration: "0",
+					duration: 0,
 				}}></m.div>
 		</>
 	);

@@ -18,6 +18,7 @@ export default function ProjectCard({
 }) {
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
+	const resolvedLocale = locale || "ru-RU";
 	const ref = useRef(null);
 	const isInView = useInView(ref);
 	const Hosting = project.hosting.Icon;
@@ -45,10 +46,7 @@ export default function ProjectCard({
 			</div>
 			<div className='grid grid-cols-[auto_1fr] h-min gap-2 place-items-center justify-items-start'>
 				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
-					{locale
-						? localeData[locale].stack
-						: "Stack"}
-					:
+					{localeData[resolvedLocale]?.stack}:
 				</h5>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors flex-wrap p-2 rounded'>
 					{project.tech.map(({ name, Icon }) => {
@@ -73,10 +71,7 @@ export default function ProjectCard({
 					})}
 				</div>
 				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
-					{locale
-						? localeData[locale].web
-						: "web page"}
-					:
+					{localeData[resolvedLocale]?.web}:
 				</h5>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
 					<a
@@ -96,10 +91,7 @@ export default function ProjectCard({
 					</a>
 				</div>
 				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
-					{locale
-						? localeData[locale].github
-						: "github repository"}
-					:
+					{localeData[resolvedLocale]?.github}:
 				</h5>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
 					<a

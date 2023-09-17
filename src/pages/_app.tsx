@@ -104,7 +104,7 @@ export default function App({
 										}}
 										transition={{
 											type: "tween",
-											easing: "easeOut",
+											ease: "easeOut",
 											duration: 1,
 										}}
 										className='flex h-full w-full flex-col items-center'>
