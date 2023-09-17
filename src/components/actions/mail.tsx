@@ -66,9 +66,17 @@ export default function MailForm({
 				localeFormData[resolvedLocale].form.name
 					.error.min
 			)
-			.max(50, localeFormData[resolvedLocale].form.name
-				.error.max),
-		email: z.string().email(),
+			.max(
+				50,
+				localeFormData[resolvedLocale].form.name
+					.error.max
+			),
+		email: z
+			.string()
+			.email(
+				localeFormData[resolvedLocale].form.email
+					.error
+			),
 		message: z
 			.string()
 			.min(
@@ -124,7 +132,9 @@ export default function MailForm({
 			});
 			if (response.status) {
 				enqueueSnackbar({
-					message: localeFormData[resolvedLocale].form.toast.success,
+					message:
+						localeFormData[resolvedLocale].form
+							.toast.success,
 					variant: "success",
 					autoHideDuration: 6000,
 				});
@@ -177,7 +187,7 @@ export default function MailForm({
 			onSubmit={handleSubmit(onSubmit, onError)}>
 			<div className='relative w-full grid gap-4  '>
 				<AnimatedDiv
-				classNameWrapper="[grid-area:1/1/2/2]"
+					classNameWrapper='[grid-area:1/1/2/2]'
 					direction='left'
 					className='flex flex-row gap-4 flex-wrap items-center w-full '>
 					<label
@@ -190,7 +200,7 @@ export default function MailForm({
 					</label>
 				</AnimatedDiv>
 				<AnimatedDiv
-				classNameWrapper="[grid-area:2/1/3/2]"
+					classNameWrapper='[grid-area:2/1/3/2]'
 					direction='right'
 					className='flex flex-row gap-4 flex-wrap items-center '>
 					<label
@@ -203,7 +213,7 @@ export default function MailForm({
 					</label>
 				</AnimatedDiv>
 				<AnimatedDiv
-				classNameWrapper="[grid-area:3/1/4/2]"
+					classNameWrapper='[grid-area:3/1/4/2]'
 					direction='bottom'
 					className='flex flex-row gap-4 flex-wrap items-center'>
 					<label
@@ -217,7 +227,7 @@ export default function MailForm({
 				</AnimatedDiv>
 
 				<AnimatedDiv
-				classNameWrapper="[grid-area:1/2/2/3]"
+					classNameWrapper='[grid-area:1/2/2/3]'
 					direction='left'
 					className='flex flex-row gap-4 flex-wrap items-center w-full '>
 					<span className='flex-grow'>
@@ -230,7 +240,7 @@ export default function MailForm({
 					</span>
 				</AnimatedDiv>
 				<AnimatedDiv
-				classNameWrapper="[grid-area:2/2/3/3]"
+					classNameWrapper='[grid-area:2/2/3/3]'
 					direction='right'
 					className='flex flex-row gap-4 flex-wrap items-center'>
 					<span className='flex-grow'>
@@ -243,7 +253,7 @@ export default function MailForm({
 					</span>
 				</AnimatedDiv>
 				<AnimatedDiv
-				classNameWrapper="[grid-area:3/2/4/3]"
+					classNameWrapper='[grid-area:3/2/4/3]'
 					direction='bottom'
 					className='flex flex-row gap-4 flex-wrap items-center'>
 					<span className='flex-grow'>
