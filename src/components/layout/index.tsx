@@ -92,7 +92,8 @@ export default function Layout({
 				onMouseMove={handleMouseMove}
 				onPointerDownCapture={handlePointerDown}
 				ref={ref}
-				id='layout'>
+				id='layout'
+				className='w-full overflow-x-hidden relative'>
 				<Filters />
 				<Header />
 				<Mouse mousePosition={mousePosition} />

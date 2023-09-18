@@ -16,7 +16,6 @@
 	html {
 		-webkit-text-size-adjust: 100%; /* for iOS Safari */
 		text-size-adjust: 100%; /* for other mobile browsers */
-
 		-webkit-font-smoothing: antialiased;
 	}
 
@@ -24,11 +23,11 @@
 		scroll-behavior: smooth;
 	}
 
-	body {
+	body > #__next {
 		text-rendering: optimizeSpeed;
 		cursor: url(/media/cursor.svg), pointer;
 		@apply relative grid bg-surface-50 dark:bg-surface-900
-				min-h-screen w-screen max-w-[100vw]
+				min-h-screen w-full max-w-full
 				grid-cols-[1fr] grid-rows-[1fr_auto]
 				overflow-y-auto overflow-x-hidden break-words transition-colors duration-500;
 	}
