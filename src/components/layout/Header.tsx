@@ -3,10 +3,11 @@ import { AnimatePresence, m } from "framer-motion";
 import Link from "next/link";
 import { useScrollTrigger, Fab } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useIsClient, useWindowSize } from "usehooks-ts";
 
 import ToggleTheme from "../shared/ToggleTheme";
 import ScrollTop from "./ScrollTop";
-import { useIsClient, useWindowSize } from "usehooks-ts";
+
 import SwitchLocale from "./SwitchLocale";
 import MobileMenu from "./MobileMenu";
 

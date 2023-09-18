@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Tooltip from "@mui/material/Tooltip";
+import { useIsClient, useWindowSize } from "usehooks-ts";
 
 import { Project } from "@/lib/constants/projects";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
@@ -16,6 +17,8 @@ export default function ProjectCard({
 }: {
 	project: Project;
 }) {
+	const { width } = useWindowSize();
+	const isMobile = width < 720;
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
 	const resolvedLocale = locale || "ru-RU";
@@ -30,7 +33,7 @@ export default function ProjectCard({
 			initial='hidden'
 			animate={isInView ? "visible" : "hidden"}
 			exit='hidden'
-			className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8'>
+			className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 overflow-x-hidden'>
 			<div className='flex flex-col gap-2 lg:gap-4'>
 				<span className='flex flex-col gap-2'>
 					<h3 className='h3'>{project.name}</h3>
@@ -61,8 +64,16 @@ export default function ProjectCard({
 									<button>
 										<Icon
 											alt={name}
-											width={32}
-											height={32}
+											width={
+												isMobile
+													? 16
+													: 32
+											}
+											height={
+												isMobile
+													? 16
+													: 32
+											}
 										/>
 									</button>
 								</Tooltip>
@@ -80,12 +91,12 @@ export default function ProjectCard({
 						rel='noopener noreferrer'
 						className='inline-flex items-center gap-1 icon-button icon-button-primary relative button-rounded-full'>
 						<Hosting
-							width={32}
-							height={32}
+							width={isMobile ? 16 : 32}
+							height={isMobile ? 16 : 32}
 						/>
 						<ArrowOutwardIcon
-							width={16}
-							height={16}
+							width={isMobile ? 8 : 16}
+							height={isMobile ? 8 : 16}
 							className='self-start !text-black'
 						/>
 					</a>
@@ -100,13 +111,13 @@ export default function ProjectCard({
 						rel='noopener noreferrer'
 						className='inline-flex items-center gap-1 icon-button icon-button-primary relative button-rounded-full'>
 						<GitHubIcon
-							width={32}
-							height={32}
-							className='!text-black !w-8 !h-8'
+							width={isMobile ? 16 : 32}
+							height={isMobile ? 16 : 32}
+							className='!text-black '
 						/>
 						<ArrowOutwardIcon
-							width={16}
-							height={16}
+							width={isMobile ? 8 : 16}
+							height={isMobile ? 8 : 16}
 							className='self-start !text-black'
 						/>
 					</a>
