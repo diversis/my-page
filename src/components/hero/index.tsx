@@ -44,7 +44,7 @@ export default function HeroSection() {
 						exit='exit'
 						animate='visible'
 						variants={OPACITY_VARIANTS}
-						className='-z-20 absolute inset-x-0 bottom-0 -top-28 before:absolute before:inset-0 before:bg-gradient-to-t before:from-surface-50/50 before:to-tertiary-100/50 before:leading-[0] before:opacity-100 before:transition-opacity before:duration-500 after:absolute after:inset-0 after:bg-gradient-to-t after:from-surface-900/50 after:to-tertiary-800/50 after:leading-[0] after:opacity-0 after:transition-opacity after:duration-500 dark:before:opacity-0 dark:after:opacity-100'></m.div>
+						className='-z-20 absolute inset-x-0 bottom-0 -top-32 before:absolute before:inset-0 before:bg-gradient-to-t before:from-surface-50/50 before:to-tertiary-100/50 before:leading-[0] before:opacity-100 before:transition-opacity before:duration-500 after:absolute after:inset-0 after:bg-gradient-to-t after:from-surface-900/50 after:to-tertiary-800/50 after:leading-[0] after:opacity-0 after:transition-opacity after:duration-500 dark:before:opacity-0 dark:after:opacity-100'></m.div>
 				) : null}
 			</AnimatePresence>
 			<article className='container overflow-x-hidden relative flex grid-cols-1 grid-rows-[auto_minmax(0,1fr)_auto] flex-col items-center justify-center gap-8 overflow-visible px-4 py-12 pb-24 md:px-8 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-0 lg:px-12 xl:py-2'>

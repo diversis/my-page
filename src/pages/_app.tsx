@@ -17,9 +17,12 @@ import {
 	CacheProvider,
 	EmotionCache,
 } from "@emotion/react";
+import { SnackbarProvider, closeSnackbar } from "notistack";
 
 import createEmotionCache from "@/components/mui/createEmotionCache";
 import Layout from "@/components/layout";
+import { useWindowSize } from "usehooks-ts";
+import { Button } from "@mui/base";
 
 export interface MyAppProps extends AppProps {
 	emotionCache?: EmotionCache;
@@ -34,6 +37,7 @@ export default function App({
 	pageProps,
 	emotionCache = clientSideEmotionCache,
 }: MyAppProps) {
+	const { width } = useWindowSize();
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 
@@ -64,59 +68,78 @@ export default function App({
 				defaultTheme='system'
 				enableSystem={true}
 				themes={["light", "dark"]}>
-				<LazyMotion
-					features={domMax}
-					strict>
-					<MotionConfig reducedMotion='user'>
-						<RWBProvider>
-							<Layout>
-								<AnimatePresence
-									mode='sync'
-									// initial={false}
-									onExitComplete={() =>
-										window.scrollTo(
-											0,
-											0
-										)
-									}>
-									<m.div
-										key={`wrap-${router.asPath}`}
-										initial={{
-											opacity: 0,
+				<SnackbarProvider
+					anchorOrigin={{
+						horizontal: "left",
+						vertical:
+							width >= 1024
+								? "bottom"
+								: "top",
+					}}
+					action={(snackbarId) => (
+						<Button
+							onClick={() =>
+								closeSnackbar(snackbarId)
+							}
+							className='button button-tertiary button-rounded-lg relative'>
+							Dismiss
+						</Button>
+					)}>
+					<LazyMotion
+						features={domMax}
+						strict>
+						<MotionConfig reducedMotion='user'>
+							<RWBProvider>
+								<Layout>
+									<AnimatePresence
+										mode='sync'
+										// initial={false}
+										onExitComplete={() =>
+											window.scrollTo(
+												0,
+												0
+											)
+										}>
+										<m.div
+											key={`wrap-${router.asPath}`}
+											initial={{
+												opacity: 0,
 
-											translateX:
-												"-100%",
-										}}
-										animate={{
-											opacity: 1,
+												translateX:
+													"-100%",
+											}}
+											animate={{
+												opacity: 1,
 
-											translateX:
-												"0%",
-										}}
-										exit={{
-											opacity: 0,
+												translateX:
+													"0%",
+											}}
+											exit={{
+												opacity: 0,
 
-											translateX:
-												"100%",
-											transition: {
-												duration: 0.5,
-											},
-										}}
-										transition={{
-											type: "tween",
-											ease: "easeOut",
-											duration: 1,
-										}}
-										className='flex h-full w-full flex-col items-center'>
-										<Component
-											{...pageProps}
-										/>
-									</m.div>
-								</AnimatePresence>
-							</Layout>
-						</RWBProvider>
-					</MotionConfig>
-				</LazyMotion>
+												translateX:
+													"100%",
+												transition:
+													{
+														duration: 0.5,
+													},
+											}}
+											transition={{
+												type: "tween",
+												ease: "easeOut",
+												duration: 1,
+											}}
+											className='flex h-full w-full flex-col items-center'>
+											<Component
+												{...pageProps}
+											/>
+										</m.div>
+									</AnimatePresence>
+								</Layout>
+							</RWBProvider>
+						</MotionConfig>
+					</LazyMotion>
+				</SnackbarProvider>
 			</ThemeProvider>
 		</CacheProvider>
 	);

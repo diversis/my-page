@@ -141,7 +141,9 @@ export default function MailForm({
 		} catch (error) {
 			if (error instanceof AxiosError) {
 				enqueueSnackbar({
-					message: error.response?.data?.message,
+					message:
+						error.response?.data?.message ||
+						"Something went wrong",
 					variant: "error",
 				});
 			}
@@ -160,20 +162,20 @@ export default function MailForm({
 			const errorFields = Object.entries(
 				errors
 			).reduce(
-				(m, [field, message]) =>
-					m +
-					(field === "name" ? "Имя" : field) +
-					", ",
+				(m, [field, message]) => m + field + ", ",
 				""
 			);
 			enqueueSnackbar({
-				message: errorFields,
+				message:
+					`${localeFormData[resolvedLocale].errors} : ${errorFields}` ||
+					"Something went wrong",
 				variant: "error",
 			});
 		} catch (e) {
 			console.log(errors, e);
 		}
 	};
+
 	return (
 		<m.form
 			variants={STAGGER_VARIANTS}

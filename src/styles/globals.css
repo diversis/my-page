@@ -115,10 +115,10 @@
 	}
 
 	.icon-button {
-		@apply active:scale-95 transition-colors after:scale-0 after:absolute after:inset-0  after:transition-[opacity,transform,box-shadow] after:duration-500 [&:is(:hover,:focus-visible)]:after:scale-100 [&:is(:hover,:focus-visible)]:after:opacity-100 after:opacity-0 after:shadow-round-xl;
+		@apply active:scale-95 transition-colors after:scale-0 after:absolute after:-inset-4  after:transition-[opacity,transform,box-shadow] after:duration-500 [&:is(:hover,:focus-visible)]:after:scale-100 [&:is(:hover,:focus-visible)]:after:opacity-100 after:opacity-0 after:bg-gradient-radial after:to-transparent z-[1] after:-z-[1];
 	}
 	.icon-button-primary {
-		@apply after:shadow-primary-500/25 dark:after:shadow-primary-300/25  dark:active:shadow-primary-400/25 active:shadow-primary-400/25;
+		@apply after:from-primary-500/70 after:via-tertiary-500/10 dark:after:via-accent-500/40  dark:after:from-secondary-300/70  dark:active:from-primary-400/70 active:from-primary-400/70;
 	}
 
 	.button {

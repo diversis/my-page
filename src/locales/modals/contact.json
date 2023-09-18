@@ -1,6 +1,7 @@
 {
 	"ru-RU": {
 		"title": "Связаться со мной",
+		"errors": "Неверно заполнены поля",
 		"form": {
 			"name": {
 				"label": "Ваше имя",
@@ -28,6 +29,7 @@
 	},
 	"en-US": {
 		"title": "Contact me",
+		"errors": "Invalid fields",
 		"form": {
 			"name": {
 				"label": "Your name",
