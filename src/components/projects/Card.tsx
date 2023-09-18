@@ -9,6 +9,7 @@ import { useIsClient, useWindowSize } from "usehooks-ts";
 
 import { Project } from "@/lib/constants/projects";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
+import { Button } from "@mui/base";
 
 const localeData = require("@/locales/projects/card.json");
 
@@ -58,10 +59,8 @@ export default function ProjectCard({
 							<div
 								key={`tech-${name}`}
 								className='inline-flex icon-button icon-button-primary relative button-rounded-full'>
-								<Tooltip
-									// disableFocusListener
-									title={name}>
-									<button>
+								<Tooltip title={name}>
+									<Button>
 										<Icon
 											alt={name}
 											width={
@@ -75,7 +74,7 @@ export default function ProjectCard({
 													: 32
 											}
 										/>
-									</button>
+									</Button>
 								</Tooltip>
 							</div>
 						);
