@@ -16,7 +16,7 @@ export default function ProjectsDisplay() {
 	const resolvedLocale = locale || "ru-RU";
 
 	return (
-		<section className='relative container flex flex-col items-center gap-4'>
+		<section className='relative container flex flex-col items-center gap-4 px-1 lg:px-2'>
 			<div className='absolute w-screen -top-24 -left-1/8 opacity-30 -z-10 horizontal-frame-mask'>
 				<Image
 					src={codeImage}

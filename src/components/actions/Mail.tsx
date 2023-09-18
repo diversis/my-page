@@ -43,7 +43,6 @@ async function sendFormData({
 	data: MailFields;
 	url: string;
 }): Promise<AxiosResponse<any, any>> {
-	console.info("sending data: ", data);
 	return await axios({
 		method: "post",
 		url: url,
@@ -125,7 +124,6 @@ export default function MailForm({
 		e
 	) => {
 		try {
-			console.info("submit: ", data);
 			const response = await sendFormData({
 				data: { ...data },
 				url: endpoint,
@@ -176,7 +174,6 @@ export default function MailForm({
 			console.log(errors, e);
 		}
 	};
-	// console.log(errors);
 	return (
 		<m.form
 			variants={STAGGER_VARIANTS}

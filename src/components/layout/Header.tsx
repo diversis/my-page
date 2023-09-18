@@ -36,9 +36,6 @@ export default function Header() {
 									<Link href='/'>
 										HOME
 									</Link>
-									<Link href='/about'>
-										About
-									</Link>
 								</div>
 								<div className='flex flex-row gap-2'>
 									<SwitchLocale />

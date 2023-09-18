@@ -1,11 +1,11 @@
 import Head from "next/head";
 
-const DOMAIN = "https://----------------------.vercel.app";
+const DOMAIN = "https://diversis.vercel.app";
 
 export default function Meta({
 	title = "My Page",
 	description = "My Page",
-	image = `${DOMAIN}/1.jpg`,
+	image = `${DOMAIN}/media/hero.png`,
 }: {
 	title?: string;
 	description?: string;
@@ -15,7 +15,7 @@ export default function Meta({
 		<Head>
 			<link
 				rel='icon'
-				href='/favicon-32x32.png'
+				href='/media/hero.png'
 			/>
 
 			<meta charSet='utf-8' />
@@ -29,7 +29,7 @@ export default function Meta({
 			/>
 			<meta
 				property='og:logo'
-				content={`${DOMAIN}/favicon-32x32.png`}></meta>
+				content={image}></meta>
 			<meta
 				property='og:title'
 				content={title}

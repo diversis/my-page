@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export default function SwitchLocale() {
 	const router = useRouter();
-	const { pathname, asPath, query } = router;
+	const { pathname, asPath, query, locale } = router;
 
 	const createHandleMenuClick = (menuItem: string) => {
 		return () => {
@@ -17,7 +17,18 @@ export default function SwitchLocale() {
 
 	return (
 		<Dropdown>
-			<MenuButton className='relative icon-button icon-button-primary button-rounded-full bg-transparent px-2 py-1'>
+			<MenuButton
+				label={
+					locale === "ru_RU"
+						? "Перевести"
+						: "Translate"
+				}
+				aria-label={
+					locale === "ru_RU"
+						? "Перевести"
+						: "Translate"
+				}
+				className='relative icon-button icon-button-primary button-rounded-full bg-transparent px-2 py-1'>
 				<TranslateIcon />
 			</MenuButton>
 			<Menu

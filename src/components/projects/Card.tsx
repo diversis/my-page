@@ -49,9 +49,9 @@ export default function ProjectCard({
 				/>
 			</div>
 			<div className='grid grid-cols-[auto_1fr] h-min gap-2 place-items-center justify-items-start'>
-				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
+				<p className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.stack}:
-				</h5>
+				</p>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors flex-wrap p-0.5 md:p-2 rounded'>
 					{project.tech.map(({ name, Icon }) => {
 						// const Icon = icon;
@@ -80,11 +80,14 @@ export default function ProjectCard({
 						);
 					})}
 				</div>
-				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
+				<p className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.web}:
-				</h5>
+				</p>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors p-0.5 md:p-2 rounded'>
 					<a
+						title={
+							localeData[resolvedLocale]?.web
+						}
 						href={project.webLink}
 						target='_blank'
 						rel='noopener noreferrer'
@@ -100,11 +103,15 @@ export default function ProjectCard({
 						/>
 					</a>
 				</div>
-				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
+				<p className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.github}:
-				</h5>
+				</p>
 				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-0.5 md:p-2 rounded'>
 					<a
+						title={
+							localeData[resolvedLocale]
+								?.github
+						}
 						href={project.gitHub}
 						target='_blank'
 						rel='noopener noreferrer'
