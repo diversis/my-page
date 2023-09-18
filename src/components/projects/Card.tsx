@@ -18,7 +18,7 @@ export default function ProjectCard({
 	project: Project;
 }) {
 	const { width } = useWindowSize();
-	const isMobile = width < 720;
+	const isMobile = width < 768;
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
 	const resolvedLocale = locale || "ru-RU";
@@ -48,10 +48,10 @@ export default function ProjectCard({
 				/>
 			</div>
 			<div className='grid grid-cols-[auto_1fr] h-min gap-2 place-items-center justify-items-start'>
-				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
+				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.stack}:
 				</h5>
-				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors flex-wrap p-2 rounded'>
+				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors flex-wrap p-0.5 md:p-2 rounded'>
 					{project.tech.map(({ name, Icon }) => {
 						// const Icon = icon;
 						return (
@@ -81,10 +81,10 @@ export default function ProjectCard({
 						);
 					})}
 				</div>
-				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
+				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.web}:
 				</h5>
-				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
+				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors p-0.5 md:p-2 rounded'>
 					<a
 						href={project.webLink}
 						target='_blank'
@@ -101,10 +101,10 @@ export default function ProjectCard({
 						/>
 					</a>
 				</div>
-				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-2 rounded transition-colors'>
+				<h5 className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.github}:
 				</h5>
-				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-2 rounded'>
+				<div className='flex gap-2 items-center bg-surface-50/80 transition-colors  p-0.5 md:p-2 rounded'>
 					<a
 						href={project.gitHub}
 						target='_blank'
@@ -113,7 +113,7 @@ export default function ProjectCard({
 						<GitHubIcon
 							width={isMobile ? 16 : 32}
 							height={isMobile ? 16 : 32}
-							className='!text-black '
+							className='!text-black !w-4 !h-4 md:!w-8 md:!h-8'
 						/>
 						<ArrowOutwardIcon
 							width={isMobile ? 8 : 16}

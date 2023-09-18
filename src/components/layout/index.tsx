@@ -1,13 +1,12 @@
 import {
 	ReactNode,
-	SetStateAction,
 	useRef,
 	useState,
-	Dispatch,
 	useEffect,
 	PointerEvent,
 } from "react";
 import { Playfair_Display } from "next/font/google";
+import { useWindowSize } from "usehooks-ts";
 
 import Meta from "./Meta";
 import Header from "./Header";
@@ -24,6 +23,8 @@ export default function Layout({
 }: {
 	children: ReactNode;
 }) {
+	const { width } = useWindowSize();
+
 	const { show } = useModal((state) => ({
 		show: state.show,
 	}));
@@ -96,11 +97,13 @@ export default function Layout({
 				className='w-full overflow-x-hidden relative'>
 				<Filters />
 				<Header />
-				<Mouse mousePosition={mousePosition} />
+				{width >= 1024 ? (
+					<Mouse mousePosition={mousePosition} />
+				) : null}
 				<MouseClick clicks={clicks} />
 				<div id='page-top' />
 				<main
-					className={`z-10 flex overflow-x-hidden min-h-screen [&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>
+					className={`z-10 flex overflow-x-hidden min-h-screen lg:[&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>
 					{children}
 				</main>
 				<Footer />

@@ -23,7 +23,7 @@ export default function Hero({
 			data-test='hero-section-image'
 			key='hero-image'
 			ref={ref}
-			className='relative flex  max-h-full w-full max-w-[60%] items-center justify-center place-self-center [grid-area:2/1/3/2] lg:max-w-full lg:[grid-area:1/8/3/13]'
+			className='relative flex  max-h-full w-full max-w-[80%] md:max-w-[60%] items-center justify-center place-self-center [grid-area:2/1/3/2] lg:max-w-full lg:[grid-area:1/8/3/13]'
 			variants={OPACITY_VARIANTS}
 			initial='hidden'
 			animate={isInView ? "visible" : "hidden"}

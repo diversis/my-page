@@ -22,17 +22,18 @@
 	html:focus-within {
 		scroll-behavior: smooth;
 	}
-
-	body > #__next {
+	body {
 		text-rendering: optimizeSpeed;
-		cursor: url(/media/cursor.svg), pointer;
+		@apply lg:[cursor:url(/media/cursor.svg),pointer];
+	}
+	body > #__next {
 		@apply relative grid bg-surface-50 dark:bg-surface-900
 				min-h-screen w-full max-w-full
 				grid-cols-[1fr] grid-rows-[1fr_auto]
 				overflow-y-auto overflow-x-hidden break-words transition-colors duration-500;
 	}
 	.dark body {
-		cursor: url(/media/cursor-light.svg), pointer;
+		@apply lg:[cursor:url(/media/cursor-light.svg),pointer];
 	}
 
 	svg {
@@ -48,21 +49,7 @@
 	[type="radio"]:not([disabled]),
 	[type="submit"]:not([disabled]),
 	[type="checkbox"]:not([disabled]) {
-		cursor: url(/media/cursor-active-dark.svg), pointer;
-	}
-
-	.dark
-		:is(
-			a,
-			label:not([disabled]),
-			button:not([disabled]),
-			select:not([disabled]),
-			summary:not([disabled]),
-			[type="radio"]:not([disabled]),
-			[type="submit"]:not([disabled]),
-			[type="checkbox"]:not([disabled])
-		) {
-		cursor: url(/media/cursor-active.svg), pointer;
+		@apply lg:[cursor:url(/media/cursor-active-dark.svg),pointer] dark:lg:[cursor:url(/media/cursor-active.svg),pointer];
 	}
 
 	[disabled] {
