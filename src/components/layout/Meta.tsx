@@ -3,8 +3,8 @@ import Head from "next/head";
 const DOMAIN = "https://diversis.vercel.app";
 
 export default function Meta({
-	title = "My Page",
-	description = "My Page",
+	title = "Diversis",
+	description = "diversis' personal page with web developer portfolio",
 	image = `${DOMAIN}/media/hero.png`,
 }: {
 	title?: string;
