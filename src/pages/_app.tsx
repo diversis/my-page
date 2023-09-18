@@ -39,6 +39,8 @@ export default function App({
 }: MyAppProps) {
 	const { width } = useWindowSize();
 	const router = useRouter();
+	const { locale } = router;
+	const resolvedLocale = locale || "ru_RU";
 	const [loading, setLoading] = useState(false);
 
 	const start = () => {
@@ -82,7 +84,9 @@ export default function App({
 								closeSnackbar(snackbarId)
 							}
 							className='button button-tertiary button-rounded-lg relative'>
-							Dismiss
+							{resolvedLocale === "ru_RU"
+								? "Закрыть"
+								: "Dismiss"}
 						</Button>
 					)}>
 					<LazyMotion
