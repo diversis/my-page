@@ -212,6 +212,7 @@
 		@apply [clip-path:url('/media/wave.svg')];
 	}
 
+
 	/* Spicy */
 	@supports (
 			(background-clip: text) or
@@ -265,4 +266,19 @@
 	.p {
 		@apply text-base lg:text-lg;
 	}
+
+	
+    /* keyframes */
+
+    @keyframes scale-pulse-full {
+        0%,
+        100% {
+            opacity: 0;
+            transform: scale(0);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 }

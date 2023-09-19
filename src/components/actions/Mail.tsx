@@ -20,6 +20,7 @@ import { STAGGER_VARIANTS } from "@/lib/constants/variants";
 import AnimatedDiv from "../shared/AnimatedDiv";
 import { Button } from "@mui/base";
 import { useRouter } from "next/router";
+import LoaderDots from "../shared/LoaderDots";
 
 const endpoint = "/api/sendmail";
 
@@ -282,16 +283,30 @@ export default function MailForm({
 						}
 					</Button>
 				</AnimatedDiv>
+
 				<AnimatedDiv
 					overflowHidden={false}
 					direction='bottom'>
 					<Button
+						disabled={isSubmitting}
 						type='submit'
-						className='button button-primary button-rounded-lg relative'>
-						{
-							localeModalData[resolvedLocale]
-								?.submit
-						}
+						className='button button-primary button-rounded-lg relative flex items-center'>
+						{isSubmitting ? (
+							<LoaderDots className='absolute inset-x-0' />
+						) : null}
+
+						<span
+							className={`${
+								isSubmitting
+									? "opacity-0 pointer-events-none"
+									: ""
+							}`}>
+							{
+								localeModalData[
+									resolvedLocale
+								]?.submit
+							}
+						</span>
 					</Button>
 				</AnimatedDiv>
 			</AnimatedDiv>

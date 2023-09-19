@@ -90,7 +90,7 @@ const config: Config = {
       },
       animation: {
         'cursor-pulse': "cursor-pulse 2s cubic-bezier(0.650, -0.600, 0.585, 1.540) 5s",
-        'rotate-slow': 'rotate 30s linear  infinite'
+        'rotate-slow': 'rotate 30s linear  infinite',
       },
       keyframes: {
         'cursor-pulse': {
@@ -98,6 +98,7 @@ const config: Config = {
           '50%': { transform: 'scale(40)', opacity: '1' },
           '100%': { transform: 'scale(100)', opacity: '0.5' }
         },
+
         'rotate': {
           '0%': { transform: 'rotate(0)' },
           '100%': { transform: 'rotate(360deg)' }
@@ -108,6 +109,13 @@ const config: Config = {
       }
     },
   },
+  safelist: [
+    {
+      pattern:
+        /bg-(primary|secondary|accent|surface|tertiary)-(100|200|300|400|500|600|700|800|900)/, // You can display all the colors that you need
+      variants: ["lg", "hover", "focus", "lg:hover"],
+    }, // Optional
+  ],
   plugins: [],
 }
 export default config

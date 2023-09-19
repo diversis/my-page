@@ -13,12 +13,17 @@ import ToggleTheme from "../shared/ToggleTheme";
 import { MAIN_MENU } from "@/lib/nav/menu";
 import SwitchLocale from "../layout/SwitchLocale";
 import { SLIDE_Y_VARIANTS } from "@/lib/constants/variants";
+import { useRouter } from "next/router";
 
 export default function MobileMenuContainer({
 	toggle,
 }: {
 	toggle: Dispatch<SetStateAction<boolean>>;
 }) {
+	const { locale, locales, defaultLocale, asPath } =
+		useRouter();
+	const resolvedLocale = locale || "ru-RU";
+
 	const variants: Variants = {
 		open: {
 			transform: "translateX(0%)",
@@ -96,9 +101,15 @@ export default function MobileMenuContainer({
 					className='flex items-center'>
 					{MAIN_MENU.map((page) => (
 						<Link
-							key={`main-menu-${page.title}`}
+							key={`main-menu-${
+								resolvedLocale === "ru-RU"
+									? "На Главную"
+									: "Home"
+							}`}
 							href={page.url || "#"}>
-							{page.title}
+							{resolvedLocale === "ru-RU"
+								? "На Главную"
+								: "Home"}
 						</Link>
 					))}
 				</m.div>

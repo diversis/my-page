@@ -1,1 +1,1 @@
-export const MAIN_MENU = [{ title: "Home", url: "/" }]
+export const MAIN_MENU = [{ url: "/" }]

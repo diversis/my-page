@@ -84,7 +84,7 @@ export default function App({
 								closeSnackbar(snackbarId)
 							}
 							className='button button-tertiary button-rounded-lg relative'>
-							{resolvedLocale === "ru_RU"
+							{resolvedLocale === "ru-RU"
 								? "Закрыть"
 								: "Dismiss"}
 						</Button>

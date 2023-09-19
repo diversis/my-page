@@ -10,8 +10,12 @@ import ScrollTop from "./ScrollTop";
 
 import SwitchLocale from "./SwitchLocale";
 import MobileMenu from "./MobileMenu";
+import { useRouter } from "next/router";
 
 export default function Header() {
+	const { locale, locales, defaultLocale, asPath } =
+		useRouter();
+	const resolvedLocale = locale || "ru-RU";
 	const { width } = useWindowSize();
 	const isClient = useIsClient();
 	const scrolled = useScrollTrigger({
@@ -34,7 +38,10 @@ export default function Header() {
 							<div className='container  flex justify-between gap-2 lg:gap-4 '>
 								<div className='flex items-center gap-x-4 text-2xl text-primary-200 dark:text-primary-600 font-black [&>a]:link uppercase [&>a:is(:hover,:focus)]:text-secondary-300 [&>a]:transition-colors'>
 									<Link href='/'>
-										HOME
+										{resolvedLocale ===
+										"ru-RU"
+											? "На Главную"
+											: "Home"}
 									</Link>
 								</div>
 								<div className='flex flex-row gap-2'>
