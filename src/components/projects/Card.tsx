@@ -30,24 +30,29 @@ export default function ProjectCard({
 	return (
 		<m.div
 			ref={ref}
-			variants={OPACITY_VARIANTS}
 			initial='hidden'
 			animate={isInView ? "visible" : "hidden"}
 			exit='hidden'
 			className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 overflow-x-hidden'>
-			<div className='flex flex-col gap-2 lg:gap-4'>
-				<span className='flex flex-col gap-2'>
+			<m.div className='flex flex-col gap-2 lg:gap-4'>
+				<m.span
+					variants={OPACITY_VARIANTS}
+					className='flex flex-col gap-2'>
 					<h3 className='h3'>{project.name}</h3>
 					<p className='h5'>{project.type}</p>
-				</span>
+				</m.span>
 				<Image
 					alt={project.name}
 					src={`/media/projects/${project.image}`}
 					width={500}
 					height={500}
-					className='h-auto rounded'
+					className={` h-auto rounded transition-[mask] mask-img  ${
+						isInView
+							? "[--_p:calc(100%_+_var(--z))] [transition-delay:0.5s]"
+							: ""
+					}`}
 				/>
-			</div>
+			</m.div>
 			<div className='grid grid-cols-[auto_1fr] h-min gap-2 place-items-center justify-items-start'>
 				<p className='h5 w-full text-left bg-surface-100/50 dark:bg-surface-800/50 p-0.5 md:p-2 rounded transition-colors'>
 					{localeData[resolvedLocale]?.stack}:

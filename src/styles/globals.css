@@ -212,6 +212,46 @@
 		@apply [clip-path:url('/media/wave.svg')];
 	}
 
+	.mask-img {
+		--z: 44px;
+		--g: calc(50% + var(--z) / 4) var(--z) repeat-y
+			content-box;
+
+		-webkit-mask:
+			linear-gradient(#000 0 0),
+			conic-gradient(
+					from 225deg at right,
+					#000 25%,
+					#0000 0
+				)
+				calc(0% - var(--_p, 0%))
+				calc(50% + var(--z) / 2) / var(--g),
+			conic-gradient(
+					from 45deg at left,
+					#000 25%,
+					#0000 0
+				)
+				calc(100% + var(--_p, 0%)) 50% / var(--g);
+		mask:
+			linear-gradient(#000 0 0),
+			conic-gradient(
+					from 225deg at right,
+					#000 25%,
+					#0000 0
+				)
+				calc(0% - var(--_p, 0%))
+				calc(50% + var(--z) / 2) / var(--g),
+			conic-gradient(
+					from 45deg at left,
+					#000 25%,
+					#0000 0
+				)
+				calc(100% + var(--_p, 0%)) 50% / var(--g);
+		-webkit-mask-composite: xor, source-over;
+		mask-composite: exclude, add;
+		transition-duration: 1s;
+		transition-timing-function: ease-out;
+	}
 
 	/* Spicy */
 	@supports (
@@ -267,18 +307,17 @@
 		@apply text-base lg:text-lg;
 	}
 
-	
-    /* keyframes */
+	/* keyframes */
 
-    @keyframes scale-pulse-full {
-        0%,
-        100% {
-            opacity: 0;
-            transform: scale(0);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
+	@keyframes scale-pulse-full {
+		0%,
+		100% {
+			opacity: 0;
+			transform: scale(0);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
 }
