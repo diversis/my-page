@@ -24,7 +24,11 @@ export default function ProjectCard({
 		useRouter();
 	const resolvedLocale = locale || "ru-RU";
 	const ref = useRef(null);
+	const refImg = useRef(null);
 	const isInView = useInView(ref);
+	const isImgInView = useInView(refImg, {
+		amount: "all",
+	});
 	const Hosting = project.hosting.Icon;
 	const TypeIcon = project.typeIcon;
 	return (
@@ -42,14 +46,15 @@ export default function ProjectCard({
 					<p className='h5'>{project.type}</p>
 				</m.span>
 				<Image
+					ref={refImg}
 					alt={project.name}
 					src={`/media/projects/${project.image}`}
 					width={500}
 					height={500}
-					className={` h-auto rounded transition-[mask] mask-img  ${
-						isInView
-							? "[--_p:calc(100%_+_var(--z))] [transition-delay:0.5s]"
-							: ""
+					className={` h-auto rounded transition-[mask] mask-img ease-in-out ${
+						isImgInView
+							? "[--_p:calc(100%_+_var(--z))] delay-200 duration-1000 "
+							: "duration-500"
 					}`}
 				/>
 			</m.div>
