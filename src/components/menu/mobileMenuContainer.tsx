@@ -94,7 +94,7 @@ export default function MobileMenuContainer({
 			animate='open'
 			exit='closed'
 			variants={variants}
-			className='absolute right-0 top-0 flex h-screen w-[50vw] min-w-[15rem] translate-x-full flex-col gap-8  overflow-hidden bg-surface-50/50 backdrop-blur-[8px] transition-colors duration-300 [transform:translateZ(0)] dark:bg-surface-900/50  '>
+			className='absolute right-0 top-0 flex h-screen w-screen xs:w-[50vw] md:min-w-[15rem] translate-x-full flex-col gap-8  overflow-hidden bg-surface-50/50 backdrop-blur-[8px] transition-colors duration-300 [transform:translateZ(0)] dark:bg-surface-900/50  '>
 			<m.div className='mt-20 flex w-full flex-col items-center gap-8 place-self-start px-4'>
 				<m.div
 					variants={variantsSlideTop}

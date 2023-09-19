@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: { raw: "(min-width: 375px)" },
+        // => @media (min-width: 320px) { ... }
+      },
       colors: {
         primary: {
           50: "#E0F4F5",
