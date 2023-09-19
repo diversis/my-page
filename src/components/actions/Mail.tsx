@@ -183,7 +183,7 @@ export default function MailForm({
 			initial='hidden'
 			animate='visible'
 			exit='hidden'
-			className='relative w-full flex min-w-[20rem] flex-col gap-4  '
+			className='relative w-full flex md:min-w-[20rem] flex-col gap-4  '
 			onSubmit={handleSubmit(onSubmit, onError)}>
 			<div className='relative w-full grid gap-4  '>
 				<AnimatedDiv
