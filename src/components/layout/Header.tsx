@@ -11,17 +11,15 @@ import ScrollTop from "./ScrollTop";
 import SwitchLocale from "./SwitchLocale";
 import MobileMenu from "./MobileMenu";
 import { useRouter } from "next/router";
+import useScrolled from "@/lib/hooks/use-scrolled";
 
 export default function Header() {
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
 	const resolvedLocale = locale || "ru-RU";
 	const { width } = useWindowSize();
-	const isClient = useIsClient();
-	const scrolled = useScrollTrigger({
-		target: isClient ? window : undefined,
-		threshold: 300,
-	});
+	// const isClient = useIsClient();
+	const scrolled = useScrolled(300);
 	return (
 		<header>
 			<AnimatePresence mode='sync'>
