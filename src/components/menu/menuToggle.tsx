@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { m } from "framer-motion";
+import { useModal } from "@/lib/hooks/use-modal";
 
 const Path = (props: any) => (
 	<m.path
@@ -19,6 +20,16 @@ export const MenuToggle = ({
 	toggle: Dispatch<SetStateAction<boolean>>;
 	menuOpen: boolean;
 }) => {
+	const { show, addModal, removeModal } = useModal(
+		(state) => ({
+			show: state.show,
+			addModal: state.addModal,
+			removeModal: state.removeModal,
+			modals: state.modals,
+		})
+	);
+
+	
 	return (
 		<m.button
 			initial='closed'

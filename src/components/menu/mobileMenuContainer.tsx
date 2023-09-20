@@ -1,5 +1,9 @@
 "use client";
-import { Variants, m } from "framer-motion";
+import {
+	AnimatePresence,
+	Variants,
+	m,
+} from "framer-motion";
 import {
 	useRef,
 	Dispatch,
@@ -17,8 +21,10 @@ import { useRouter } from "next/router";
 
 export default function MobileMenuContainer({
 	toggle,
+	open,
 }: {
 	toggle: Dispatch<SetStateAction<boolean>>;
+	open: boolean;
 }) {
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
@@ -88,46 +94,52 @@ export default function MobileMenuContainer({
 	};
 
 	return (
-		<m.div
-			id='nav-container'
-			initial='closed'
-			animate='open'
-			exit='closed'
-			variants={variants}
-			className='absolute right-0 top-0 flex h-screen w-screen xs:w-[50vw] md:min-w-[15rem] translate-x-full flex-col gap-8  overflow-hidden bg-surface-50/50 backdrop-blur-[8px] transition-colors duration-300 [transform:translateZ(0)] dark:bg-surface-900/50  '>
-			<m.div className='mt-20 flex w-full flex-col items-center gap-8 place-self-start px-4'>
+		<AnimatePresence>
+			{open ? (
 				<m.div
-					variants={variantsSlideTop}
-					className='flex items-center'>
-					{MAIN_MENU.map((page) => (
-						<Link
-							key={`main-menu-${
-								resolvedLocale === "ru-RU"
-									? "На Главную"
-									: "Home"
-							}`}
-							href={page.url || "#"}>
-							{resolvedLocale === "ru-RU"
-								? "На Главную"
-								: "Home"}
-						</Link>
-					))}
-				</m.div>
+					id='nav-container'
+					initial='closed'
+					animate='open'
+					exit='closed'
+					variants={variants}
+					className='flex flex-col gap-8  overflow-hidden text-surface-900 dark:text-surface-50'>
+					<m.div className='mt-20 flex w-full flex-col items-center gap-8 place-self-start px-4'>
+						<m.div
+							variants={variantsSlideTop}
+							className='flex items-center'>
+							{MAIN_MENU.map((page) => (
+								<Link
+									key={`main-menu-${
+										resolvedLocale ===
+										"ru-RU"
+											? "На Главную"
+											: "Home"
+									}`}
+									href={page.url || "#"}>
+									{resolvedLocale ===
+									"ru-RU"
+										? "На Главную"
+										: "Home"}
+								</Link>
+							))}
+						</m.div>
 
-				<Social />
-				<m.div
-					variants={variantsSlideBot}
-					key='switch-locale'>
-					<SwitchLocale />
-				</m.div>
-			</m.div>
+						<Social />
+						<m.div
+							variants={variantsSlideBot}
+							key='switch-locale'>
+							<SwitchLocale />
+						</m.div>
+					</m.div>
 
-			<m.div
-				id='theme-toggle '
-				variants={variantsSlideBot}
-				className='w-min place-self-center'>
-				<ToggleTheme />
-			</m.div>
-		</m.div>
+					<m.div
+						id='theme-toggle '
+						variants={variantsSlideBot}
+						className='w-min place-self-center'>
+						<ToggleTheme />
+					</m.div>
+				</m.div>
+			) : null}
+		</AnimatePresence>
 	);
 }

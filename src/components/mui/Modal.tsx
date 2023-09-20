@@ -10,7 +10,6 @@ import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
 import { useModal } from "@/lib/hooks/use-modal";
-import { randomUUID } from "crypto";
 
 export type MUIBaseModalProps = {
 	title: string;

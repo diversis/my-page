@@ -9,12 +9,6 @@ export default function SwitchLocale() {
 	const router = useRouter();
 	const { pathname, asPath, query, locale } = router;
 
-	const createHandleMenuClick = (menuItem: string) => {
-		return () => {
-			console.log(`Clicked on ${menuItem}`);
-		};
-	};
-
 	return (
 		<Dropdown>
 			<MenuButton
