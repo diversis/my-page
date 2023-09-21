@@ -213,7 +213,7 @@
 	}
 
 	.mask-img {
-		--z: 44px;
+		--z: 75px;
 		--g: calc(50% + var(--z) / 4) var(--z) repeat-y
 			content-box;
 

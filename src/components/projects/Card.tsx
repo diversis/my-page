@@ -51,10 +51,10 @@ export default function ProjectCard({
 					src={`/media/projects/${project.image}`}
 					width={500}
 					height={500}
-					className={` h-auto rounded transition-[mask] mask-img ease-in-out ${
+					className={` h-auto rounded transition-[mask,opacity] mask-img ease-in-out ${
 						isImgInView
-							? "[--_p:calc(100%_+_var(--z))] delay-200 duration-1000 "
-							: "duration-500"
+							? "[--_p:calc(100%_+_var(--z))] delay-200 duration-1000 opacity-100"
+							: "duration-500 opacity-0"
 					}`}
 				/>
 			</m.div>
