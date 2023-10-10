@@ -1,3 +1,4 @@
+import { useWindowPointerDown } from "@/lib/hooks/use-window-pointer-down";
 import {
 	AnimatePresence,
 	TapInfo,
@@ -5,28 +6,12 @@ import {
 	useAnimate,
 } from "framer-motion";
 import { set } from "nprogress";
-import {
-	SetStateAction,
-	useState,
-	Dispatch,
-	useEffect,
-	PointerEvent,
-	useMemo,
-} from "react";
+import { useMemo } from "react";
 
-export default function MouseClick({
-	clicks,
-}: {
-	clicks:
-		| {
-				[key in keyof string]: {
-					x: number;
-					y: number;
-				};
-		  }
-		| {};
-}) {
+export default function MouseClick() {
 	const [scope, animate] = useAnimate();
+
+	const clicks = useWindowPointerDown();
 
 	return (
 		<>

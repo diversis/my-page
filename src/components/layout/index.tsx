@@ -15,6 +15,7 @@ import MouseClick from "./Click";
 import Footer from "./Footer";
 import Filters from "../shared/Filters";
 import { useModal } from "@/lib/hooks/use-modal";
+import { usePointerPosition } from "@/lib/hooks/use-pointer-position";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
 
@@ -39,18 +40,7 @@ export default function Layout({
 		  }
 		| {}
 	>({});
-	const [mousePosition, setMousePosition] = useState<{
-		x: number;
-		y: number;
-	}>({ x: 0, y: 0 });
-	const handleMouseMove = async (
-		e: React.MouseEvent<HTMLElement, MouseEvent>
-	) => {
-		setMousePosition({
-			x: e.clientX,
-			y: e.clientY,
-		});
-	};
+
 	const handlePointerDown = async (
 		event: PointerEvent<HTMLDivElement>
 	) => {
@@ -77,7 +67,7 @@ export default function Layout({
 
 	useEffect(() => {
 		document.body.className = show
-			? "overflow-hidden"
+			? "overflow-hidden pr-[min(0.5rem,0.5vw)]"
 			: "";
 	}, [show]);
 
@@ -90,17 +80,14 @@ export default function Layout({
 				Skip to content
 			</a>
 			<div
-				onMouseMove={handleMouseMove}
 				onPointerDownCapture={handlePointerDown}
 				ref={ref}
 				id='layout'
 				className='w-full overflow-x-hidden relative'>
 				<Filters />
 				<Header />
-				{width >= 1024 ? (
-					<Mouse mousePosition={mousePosition} />
-				) : null}
-				<MouseClick clicks={clicks} />
+				{width >= 1024 ? <Mouse /> : null}
+				<MouseClick />
 				<div id='page-top' />
 				<main
 					className={`z-10 flex overflow-x-hidden min-h-screen lg:[&>*:is(:first-child)]:mt-24 flex-col items-center justify-between ${playfair.className}`}>

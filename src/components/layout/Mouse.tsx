@@ -1,10 +1,8 @@
+import { usePointerPosition } from "@/lib/hooks/use-pointer-position";
 import { m } from "framer-motion";
 
-export default function SVGMouse({
-	mousePosition,
-}: {
-	mousePosition: { x: number; y: number };
-}) {
+export default function SVGMouse() {
+	const mousePosition = usePointerPosition();
 	return (
 		<>
 			<m.div className='pointer-events-none [mask-image:url(/media/1.svg)] bg-transparent fixed inset-x-0 top-0 h-screen'>
