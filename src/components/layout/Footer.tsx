@@ -23,7 +23,7 @@ const socialLinks: LinkItem[] = [
 
 export default function Footer() {
 	return (
-		<footer className=' relative grid  w-full place-items-center overflow-hidden bg-gradient-to-b from-transparent to-surface-600/50  transition-colors'>
+		<footer className='py-2 lg:py-8 relative grid  w-full place-items-center overflow-hidden bg-gradient-to-b from-transparent to-surface-600/50  transition-colors'>
 			<div className='flex w-full flex-col items-center gap-4 py-4'>
 				<div className='xl:gap-[clamp(2rem,10vw + 2rem,8rem)] container mx-auto flex w-full flex-col items-center justify-center gap-4 px-5 py-6 text-center lg:py-12 xl:flex-row xl:justify-between xl:text-left'>
 					<Link
