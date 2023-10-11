@@ -46,6 +46,7 @@ export default function ProjectCard({
 					<p className='h5'>{project.type}</p>
 				</m.span>
 				<Image
+					placeholder='blur'
 					ref={refImg}
 					alt={project.name}
 					src={`/media/projects/${project.image}`}
