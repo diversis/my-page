@@ -32,6 +32,7 @@ export default function Hero({
 				{/* <div className="radial-mask absolute -bottom-[10%] -left-[10%] -right-[10%] -top-[10%] isolate -z-[1] bg-black bg-gradient-to-t from-tertiary-200 to-primary-100"></div> */}
 				<div className='relative isolate z-10 aspect-[640/951] h-auto w-full'>
 					<Image
+						placeholder='blur'
 						fill
 						sizes={imageSizes}
 						src={heroImage}
