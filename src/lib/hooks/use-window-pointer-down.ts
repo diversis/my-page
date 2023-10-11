@@ -14,9 +14,7 @@ export const useWindowPointerDown = () => {
     const handlePointerDown = async (
         event: PointerEventInit
     ) => {
-        console.log(event)
         const timeKey = Date.now();
-        // console.log(event);
         await setClicks((state) => ({
             ...state,
             [timeKey]: {
@@ -29,7 +27,6 @@ export const useWindowPointerDown = () => {
                 setClicks((state) => {
                     const clickState = { ...state };
                     delete clickState[timeKey];
-                    // console.log(clickState);
                     return clickState;
                 }),
             2100

@@ -45,7 +45,6 @@ export default function Layout({
 		event: PointerEvent<HTMLDivElement>
 	) => {
 		const timeKey = Date.now();
-		// console.log(event);
 		await setClicks((state) => ({
 			...state,
 			[timeKey]: {
@@ -58,7 +57,6 @@ export default function Layout({
 				setClicks((state) => {
 					const clickState = { ...state };
 					delete clickState[timeKey];
-					// console.log(clickState);
 					return clickState;
 				}),
 			2100
