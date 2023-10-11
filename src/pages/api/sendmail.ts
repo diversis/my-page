@@ -10,13 +10,17 @@ import 'dotenv/config'
 
 import { logger } from "@/lib/utils/logger";
 import { sendTeleMessage } from '@/lib/grammy';
+import rateLimit from '@/lib/utils/rate-limit';
 
 const nodemailer = require("nodemailer")
 
 
 const emailLogger = logger.child({ origin: "API Email" });
 
-
+const limiter = rateLimit({
+	interval: 60 * 1000, // 60 seconds
+	uniqueTokenPerInterval: 50, // Max 50 users per second
+})
 
 
 const schema = z.object({
@@ -48,6 +52,7 @@ export default async function handler(
 ) {
 	if (req.method === "POST") {
 		try {
+			await limiter.check(res, 10, 'SEND_EMAIL')
 			schema.parse(req.body)
 			const { name, email, message } = req.body
 
