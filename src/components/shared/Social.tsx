@@ -75,7 +75,9 @@ export default function Social() {
 								href={item.url}
 								aria-label={`contact me on ${item.name}`}
 								title={`contact me on ${item.name}`}
-								className='relative icon-button icon-button-primary button-rounded-full group/a [&:is(:hover,:focus-visible,:focus)>svg]:scale-150 [&>svg]:scale-100 '>
+								className='relative icon-button icon-button-primary button-rounded-full group/a [&:is(:hover,:focus-visible,:focus)>svg]:scale-150 [&>svg]:scale-100 '
+								target='_blank'
+								rel='noopener noreferrer'>
 								{item.icon}
 							</a>
 						</m.div>
