@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/router";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -18,6 +18,16 @@ export default function ProjectCard({
 }: {
 	project: Project;
 }) {
+	let imageData = undefined;
+	try {
+		imageData = require(
+			`@public/media/projects/${project.image}`
+		) as StaticImageData;
+	} catch (e) {
+		imageData = require(
+			`@public/media/placeholder.jpg`
+		) as StaticImageData;
+	}
 	const { width } = useWindowSize();
 	const isMobile = width < 768;
 	const { locale, locales, defaultLocale, asPath } =
@@ -49,7 +59,7 @@ export default function ProjectCard({
 					placeholder='blur'
 					ref={refImg}
 					alt={project.name}
-					src={`/media/projects/${project.image}`}
+					src={imageData}
 					width={500}
 					height={500}
 					className={` h-auto rounded transition-[mask,opacity] mask-img ease-in-out ${

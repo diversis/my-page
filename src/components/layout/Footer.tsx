@@ -1,25 +1,5 @@
 import Link from "next/link";
-import { ReactNode } from "react";
-import GitHubIcon from "@mui/icons-material/GitHub";
-
-import Social from "../shared/Social";
-
-interface LinkItem {
-	name: string;
-	url?: string;
-	icon?: ReactNode;
-}
-
-const linkClassName =
-	"h-6 w-6 lg:h-8 lg:w-8 svg-icon-fasolid svg-icon-fasolid-interactive";
-
-const socialLinks: LinkItem[] = [
-	{
-		name: "GitHub",
-		url: "https://github.com/diversis",
-		icon: <GitHubIcon />,
-	},
-];
+import Social from "@/components/shared/Social";
 
 export default function Footer() {
 	return (

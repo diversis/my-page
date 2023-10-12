@@ -1,10 +1,13 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const DOMAIN = "https://diversis.vercel.app";
 
+const localeData = require("@/locales/projects/card.json");
+
 export default function Meta({
 	title = "Diversis",
-	description = "diversis' personal page with web developer portfolio",
+	description,
 	image = `${DOMAIN}/media/hero.png`,
 }: {
 	title?: string;
@@ -27,9 +30,16 @@ export default function Meta({
 				itemProp='image'
 				content={image}
 			/>
+			<title>{title}</title>
+			<meta
+				name='description'
+				content={description}
+				key='description'
+			/>
 			<meta
 				property='og:logo'
-				content={image}></meta>
+				content={image}
+			/>
 			<meta
 				property='og:title'
 				content={title}
