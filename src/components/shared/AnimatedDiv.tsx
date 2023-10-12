@@ -1,9 +1,52 @@
+"use client";
 import { SPRING_LIGHT } from "@/lib/constants/variants";
-import { Variants, m, useInView } from "framer-motion";
-import { ReactNode, useRef } from "react";
+import {
+	HTMLMotionProps,
+	Variants,
+	m,
+	useInView,
+} from "framer-motion";
+import { useRef } from "react";
+
+interface AnimatedDivProps extends HTMLMotionProps<"div"> {
+	classNameWrapper?: string;
+	direction?: Direction;
+	animationType?: AnimationType;
+	duration?: number;
+	animateInView?: boolean;
+	overflowHidden?: boolean;
+}
 
 export type Direction = "top" | "bottom" | "right" | "left";
 export type AnimationType = "slide" | "spring" | "opacity";
+
+export const SLIDE_Y_P_VARIANTS: Variants = {
+	hidden: {
+		translateY: "-100%",
+		opacity: 0,
+		transition: SPRING_LIGHT,
+	},
+	visible: {
+		translateY: "0%",
+		opacity: 1,
+		transition: {
+			...SPRING_LIGHT,
+			staggerChildren: 0.05,
+			delayChildren: 0.05,
+			when: "beforeChildren",
+		},
+	},
+	exit: {
+		translateY: "-100%",
+		opacity: 0,
+		transition: {
+			...SPRING_LIGHT,
+			when: "afterChildren",
+			staggerChildren: 0.05,
+			staggerDirection: -1,
+		},
+	},
+};
 
 export default function AnimatedDiv({
 	children,
@@ -16,17 +59,7 @@ export default function AnimatedDiv({
 	variants,
 	overflowHidden = true,
 	...rest
-}: {
-	children?: ReactNode;
-	className?: string;
-	classNameWrapper?: string;
-	direction?: Direction;
-	animationType?: AnimationType;
-	duration?: number;
-	animateInView?: boolean;
-	variants?: Variants;
-	overflowHidden?: boolean;
-}) {
+}: AnimatedDivProps) {
 	const ref = useRef(null);
 	const isInView = useInView(ref);
 

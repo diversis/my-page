@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useIsomorphicLayoutEffect } from "usehooks-ts";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { Switch } from "@mui/base/Switch";
 import {
 	useSwitch,
 	UseSwitchParameters,

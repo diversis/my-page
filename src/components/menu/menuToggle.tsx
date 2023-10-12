@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { m } from "framer-motion";
 import { useModal } from "@/lib/hooks/use-modal";
 
@@ -29,7 +29,6 @@ export const MenuToggle = ({
 		})
 	);
 
-	
 	return (
 		<m.button
 			initial='closed'

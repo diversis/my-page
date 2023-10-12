@@ -2,7 +2,6 @@ import {
 	AnimatePresence,
 	m,
 	useInView,
-	useScroll,
 } from "framer-motion";
 import { useRef, useState } from "react";
 

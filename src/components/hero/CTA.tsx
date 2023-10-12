@@ -3,24 +3,15 @@ import {
 	SUBTITLE_VARIANTS,
 	TITLE_VARIANTS,
 } from "@/lib/constants/variants";
+import { useRef, useState } from "react";
 import {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
-import {
-	AnimatePresence,
 	m,
 	useInView,
-	useSpring,
 	useMotionValue,
 	useTransform,
 } from "framer-motion";
-import Link from "next/link";
 import { Permanent_Marker } from "next/font/google";
 
-import Balancer from "react-wrap-balancer";
 import AnimatedDiv from "@/components/shared/AnimatedDiv";
 import { useWindowSize } from "usehooks-ts";
 import { Button } from "@mui/base";

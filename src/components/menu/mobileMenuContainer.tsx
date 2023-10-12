@@ -4,19 +4,13 @@ import {
 	Variants,
 	m,
 } from "framer-motion";
-import {
-	useRef,
-	Dispatch,
-	SetStateAction,
-	useState,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 
 import Social from "../shared/Social";
 import ToggleTheme from "../shared/ToggleTheme";
 import { MAIN_MENU } from "@/lib/nav/menu";
 import SwitchLocale from "../layout/SwitchLocale";
-import { SLIDE_Y_VARIANTS } from "@/lib/constants/variants";
 import { useRouter } from "next/router";
 
 export default function MobileMenuContainer({

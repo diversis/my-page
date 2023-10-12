@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Tooltip from "@mui/material/Tooltip";
-import { useIsClient, useWindowSize } from "usehooks-ts";
+import { useWindowSize } from "usehooks-ts";
 
 import { Project } from "@/lib/constants/projects";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";

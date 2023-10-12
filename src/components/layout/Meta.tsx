@@ -1,9 +1,6 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 const DOMAIN = "https://diversis.vercel.app";
-
-const localeData = require("@/locales/projects/card.json");
 
 export default function Meta({
 	title = "Diversis",
