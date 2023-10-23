@@ -31,14 +31,6 @@ export default function MobileMenu() {
 					open={menuOpen}
 				/>
 			</SwipeableDrawer>
-
-			{/* <AnimatePresence>
-				{menuOpen ? (
-					<MobileMenuContainer
-						toggle={setMenuOpen}
-					/>
-				) : null}
-			</AnimatePresence> */}
 			<MenuToggle
 				toggle={setMenuOpen}
 				menuOpen={menuOpen}

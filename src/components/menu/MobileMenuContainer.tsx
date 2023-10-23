@@ -101,21 +101,11 @@ export default function MobileMenuContainer({
 						<m.div
 							variants={variantsSlideTop}
 							className='flex items-center'>
-							{MAIN_MENU.map((page) => (
-								<Link
-									key={`main-menu-${
-										resolvedLocale ===
-										"ru-RU"
-											? "На Главную"
-											: "Home"
-									}`}
-									href={page.url || "#"}>
-									{resolvedLocale ===
-									"ru-RU"
-										? "На Главную"
-										: "Home"}
-								</Link>
-							))}
+							<Link href='/'>
+								{resolvedLocale === "ru-RU"
+									? "На Главную"
+									: "Home"}
+							</Link>
 						</m.div>
 
 						<Social />

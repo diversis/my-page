@@ -17,9 +17,10 @@ export default function Header() {
 	const { locale, locales, defaultLocale, asPath } =
 		useRouter();
 	const resolvedLocale = locale || "ru-RU";
+
 	const { width } = useWindowSize();
-	// const isClient = useIsClient();
 	const scrolled = useScrolled(300);
+
 	return (
 		<header>
 			<AnimatePresence mode='sync'>
