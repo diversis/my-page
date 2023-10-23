@@ -65,88 +65,92 @@ export default function App({
 	}, [router.events]);
 
 	return (
-		<CacheProvider value={emotionCache}>
-			<ThemeProvider
-				attribute='class'
-				defaultTheme='system'
-				enableSystem={true}
-				themes={["light", "dark"]}>
-				<SnackbarProvider
-					anchorOrigin={{
-						horizontal: "left",
-						vertical:
-							width >= 1024
-								? "bottom"
-								: "top",
-					}}
-					action={(snackbarId) => (
-						<Button
-							onClick={() =>
-								closeSnackbar(snackbarId)
-							}
-							className='button button-tertiary button-rounded-lg relative'>
-							{resolvedLocale === "ru-RU"
-								? "Закрыть"
-								: "Dismiss"}
-						</Button>
-					)}>
-					<LazyMotion
-						features={domMax}
-						strict>
-						<MotionConfig reducedMotion='user'>
-							<RWBProvider>
-								<Layout>
-									<AnimatePresence
-										mode='sync'
-										// initial={false}
-										onExitComplete={() =>
-											window.scrollTo(
-												0,
-												0
-											)
-										}>
-										<m.div
-											key={`wrap-${router.asPath}`}
-											initial={{
-												opacity: 0,
+		<>
+			<CacheProvider value={emotionCache}>
+				<ThemeProvider
+					attribute='class'
+					defaultTheme='system'
+					enableSystem={true}
+					themes={["light", "dark"]}>
+					<SnackbarProvider
+						anchorOrigin={{
+							horizontal: "left",
+							vertical:
+								width >= 1024
+									? "bottom"
+									: "top",
+						}}
+						action={(snackbarId) => (
+							<Button
+								onClick={() =>
+									closeSnackbar(
+										snackbarId
+									)
+								}
+								className='button button-tertiary button-rounded-lg relative'>
+								{resolvedLocale === "ru-RU"
+									? "Закрыть"
+									: "Dismiss"}
+							</Button>
+						)}>
+						<LazyMotion
+							features={domMax}
+							strict>
+							<MotionConfig reducedMotion='user'>
+								<RWBProvider>
+									<Layout>
+										<AnimatePresence
+											mode='sync'
+											// initial={false}
+											onExitComplete={() =>
+												window.scrollTo(
+													0,
+													0
+												)
+											}>
+											<m.div
+												key={`wrap-${router.asPath}`}
+												initial={{
+													opacity: 0,
 
-												translateX:
-													"-100%",
-											}}
-											animate={{
-												opacity: 1,
+													translateX:
+														"-100%",
+												}}
+												animate={{
+													opacity: 1,
 
-												translateX:
-													"0%",
-											}}
-											exit={{
-												opacity: 0,
+													translateX:
+														"0%",
+												}}
+												exit={{
+													opacity: 0,
 
-												translateX:
-													"100%",
-												transition:
-													{
-														duration: 0.5,
-													},
-											}}
-											transition={{
-												type: "tween",
-												ease: "easeOut",
-												duration: 1,
-											}}
-											className='flex h-full w-full flex-col items-center'>
-											<Component
-												{...pageProps}
-											/>
-											<Analytics />
-										</m.div>
-									</AnimatePresence>
-								</Layout>
-							</RWBProvider>
-						</MotionConfig>
-					</LazyMotion>
-				</SnackbarProvider>
-			</ThemeProvider>
-		</CacheProvider>
+													translateX:
+														"100%",
+													transition:
+														{
+															duration: 0.5,
+														},
+												}}
+												transition={{
+													type: "tween",
+													ease: "easeOut",
+													duration: 1,
+												}}
+												className='flex h-full w-full flex-col items-center'>
+												<Component
+													{...pageProps}
+												/>
+											</m.div>
+										</AnimatePresence>
+									</Layout>
+								</RWBProvider>
+							</MotionConfig>
+						</LazyMotion>
+					</SnackbarProvider>
+				</ThemeProvider>
+			</CacheProvider>
+			<Analytics />
+		</>
 	);
 }
