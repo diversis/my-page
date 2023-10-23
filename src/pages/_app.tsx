@@ -3,6 +3,7 @@ import "nprogress/nprogress.css";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
 import { Provider as RWBProvider } from "react-wrap-balancer";
 import NProgress from "nprogress";
@@ -137,6 +138,7 @@ export default function App({
 											<Component
 												{...pageProps}
 											/>
+											<Analytics />
 										</m.div>
 									</AnimatePresence>
 								</Layout>
