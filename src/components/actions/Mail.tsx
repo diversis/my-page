@@ -270,7 +270,8 @@ export default function MailForm({
 			<AnimatedDiv
 				overflowHidden={false}
 				direction='bottom'
-				className='mt-2 lg:mt-4 flex flex-row flex-wrap mr-0 ml-auto w-fit gap-4 lg:gap-8'>
+				classNameWrapper='mt-2 lg:mt-4 flex items-center w-full'
+				className='flex flex-row flex-wrap w-full justify-between items-center gap-4 lg:gap-8'>
 				<AnimatedDiv
 					overflowHidden={false}
 					direction='bottom'>
