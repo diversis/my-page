@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { PROJECTS } from "@/lib/constants/projects";
 import ProjectCard from "./Card";
 import codeImage from "@public/media/code.png";
+import { imageSizes } from "@/lib/constants/vars";
 
 const localeData = require("@/locales/projects/projects.json");
 
@@ -19,7 +20,9 @@ export default function ProjectsDisplay() {
 		<section className='relative container flex flex-col items-center gap-4 px-1 lg:px-2'>
 			<div className='absolute w-screen -top-24 -left-1/8 opacity-30 -z-10 horizontal-frame-mask'>
 				<Image
+					placeholder='blur'
 					src={codeImage}
+					sizes={imageSizes}
 					alt='VSCode screenshot'
 					className='wave-vertical'
 				/>

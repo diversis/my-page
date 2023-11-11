@@ -5,9 +5,9 @@ import Image from "next/image";
 import { OPACITY_VARIANTS } from "@/lib/constants/variants";
 
 import heroImage from "@public/media/hero.png";
+import { imageSizes } from "@/lib/constants/vars";
 
-const imageSizes =
-	"(max-width:480px) 60vw, (max-width: 768px) 60vw, 600px";
+
 
 export default function Hero({
 	mousePosition,

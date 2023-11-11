@@ -1,0 +1,1 @@
+export const imageSizes = "(max-width:480px) 60vw, (max-width: 768px) 60vw, 600px";
