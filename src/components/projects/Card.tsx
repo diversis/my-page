@@ -49,12 +49,12 @@ export default function ProjectCard({
 			exit='hidden'
 			className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 overflow-x-hidden'>
 			<m.div className='flex flex-col gap-2 lg:gap-4'>
-				<m.span
+				<m.div
 					variants={OPACITY_VARIANTS}
 					className='flex flex-col gap-2'>
 					<h3 className='h3'>{project.name}</h3>
 					<p className='h5'>{project.type}</p>
-				</m.span>
+				</m.div>
 				<Image
 					placeholder='blur'
 					ref={refImg}
